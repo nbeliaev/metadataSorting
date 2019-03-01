@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" version="2.7">
+	<Configuration uuid="0f1d8a27-c5e5-432e-b564-8f1a037af2b1">
+		<ChildObjects>
+			<Language>English</Language>
+			<CommonModule>CommonModule1</CommonModule>
+			<CommonModule>ОбщегоНазначения</CommonModule>
+			<Catalog>Поставщики</Catalog>
+			<Catalog>Номенклатура</Catalog>
+			<Catalog>Товары</Catalog>
+			<Document>Exp</Document>
+			<Document>Addit</Document>
+			<Document>МойДокумент</Document>
+		</ChildObjects>
+	</Configuration>
+</MetaDataObject>

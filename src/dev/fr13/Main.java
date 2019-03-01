@@ -6,7 +6,11 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.*;
 import javax.xml.xpath.*;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class Main {
 
@@ -15,12 +19,18 @@ public class Main {
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException, XPathExpressionException {
 
         // add exit code
-        // сделать длинную опцию path и --help
         parseArgs(args);
         if (sourceDirectory.isEmpty()) {
             printHelp();
             return;
         }
+
+        // check valid data
+        Path path = Paths.get(sourceDirectory);
+        if (Files.notExists(path))
+            throw new IllegalArgumentException("no such directory: " + path.toString());
+
+        long startTime = System.currentTimeMillis();
 
         // Firstly processing file with common objects
         Document mainConfig = domDocument();
@@ -51,30 +61,6 @@ public class Main {
                     parentNodeEmpty.appendChild(node);
                 }
 
-               /* Collections.sort(sortedObjectsNames);
-
-                for (int j = 0; j < sortedObjectsNames.size(); j++) {
-
-                    XPath xPath = XPathFactory.newInstance().newXPath();
-                    xPath.setNamespaceContext(new NamespaceResolver(mainConfig));
-                    XPathExpression expr = xPath.compile("//ChildObjects/" + nodeName + "[contains(text(), '" + sortedObjectsNames.get(j) + "')]");
-                    Object result = expr.evaluate(parentNode, XPathConstants.NODESET);
-                    NodeList foundNodes = (NodeList) result;
-                    if (foundNodes == null) {
-                        // exeption?
-                        System.out.println("Could not sort file: Configuration.xml");
-                        return;
-                    }
-                    else if (foundNodes.getLength() != 1){
-                        System.out.println("Duplicates found in metadata names: " + sortedObjectsNames.get(j));
-                        return;
-                    }
-
-                    Node nodeForAdding = foundNodes.item(0).cloneNode(true);
-                    parentNodeEmpty.appendChild(nodeForAdding);
-
-                }*/
-
                 //sortedObjectsNames.clear();
                 treeMap.clear();
 
@@ -97,6 +83,12 @@ public class Main {
 
         parentNode.getParentNode().replaceChild(parentNodeEmpty, parentNode);
 
+        long estimatedTime  = System.currentTimeMillis() - startTime;
+        System.out.println("Spent processing time: " + String.format(
+                "%d min, %d sec",
+                TimeUnit.MILLISECONDS.toMinutes(estimatedTime),
+                TimeUnit.MILLISECONDS.toSeconds(estimatedTime)));
+
         // del
         NodeList childTemp = mainConfig.getElementsByTagName("ChildObjects");
 
@@ -118,7 +110,7 @@ public class Main {
     private static void printHelp() {
         System.out.println("MetadataSorting sorts metadata for 1C:Enterprise solutions");
         System.out.println();
-        System.out.println("Use the -p to set directory path with metadata");
+        System.out.println("Use the -p or --path to set directory path with metadata");
     }
 
     private static String pathToMainConfig() {
@@ -156,14 +148,54 @@ public class Main {
             return;
         }
 
-        String pathAsArg = "-p";
-        String firstArg = args[0];
-        if (firstArg.contains(pathAsArg)) {
-            if (firstArg.length() > 2)
-                sourceDirectory = firstArg.substring(2, firstArg.length());
-            else
-                sourceDirectory = args[1];
+        Boolean printHelp = false;
+        for (int i=0; i < args.length; i++) {
+
+            switch (args[i]) {
+                case "-p":
+                    sourceDirectory = args[i + 1];
+                    break;
+                case "--path":
+                    sourceDirectory = args[i + 1];
+                    break;
+                case "-h":
+                    printHelp = true;
+                    break;
+                case "--help":
+                    printHelp = true;
+                    break;
+            }
+
+            if (printHelp) {
+                sourceDirectory = "";
+                break;
+            }
         }
+
     }
 
 }
+
+               /* Collections.sort(sortedObjectsNames);
+
+                for (int j = 0; j < sortedObjectsNames.size(); j++) {
+
+                    XPath xPath = XPathFactory.newInstance().newXPath();
+                    xPath.setNamespaceContext(new NamespaceResolver(mainConfig));
+                    XPathExpression expr = xPath.compile("//ChildObjects/" + nodeName + "[contains(text(), '" + sortedObjectsNames.get(j) + "')]");
+                    Object result = expr.evaluate(parentNode, XPathConstants.NODESET);
+                    NodeList foundNodes = (NodeList) result;
+                    if (foundNodes == null) {
+                        // exeption?
+                        System.out.println("Could not sort file: Configuration.xml");
+                        return;
+                    }
+                    else if (foundNodes.getLength() != 1){
+                        System.out.println("Duplicates found in metadata names: " + sortedObjectsNames.get(j));
+                        return;
+                    }
+
+                    Node nodeForAdding = foundNodes.item(0).cloneNode(true);
+                    parentNodeEmpty.appendChild(nodeForAdding);
+
+                }*/

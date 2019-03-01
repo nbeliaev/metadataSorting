@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ConfigDumpInfo xmlns="http://v8.1c.ru/8.3/xcf/dumpinfo" xmlns:xen="http://v8.1c.ru/8.3/xcf/enums" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" format="Hierarchical" version="2.7">
+	<ConfigVersions>
+		<Metadata name="Catalog.Номенклатура" id="ebd9be4a-1f9e-4508-8eda-8df45b731fb6" configVersion="1f47be96e9ce6046bf76af92c868ea5500000000">
+			<Metadata name="Catalog.Номенклатура.TabularSection.Поставщики.Attribute.Поставщик" id="024c3e5b-d8c9-46bd-b19e-c380d168de10"/>
+			<Metadata name="Catalog.Номенклатура.TabularSection.Поставщики" id="11c5fa68-3c12-4ab3-892c-740e3f5ea7da"/>
+			<Metadata name="Catalog.Номенклатура.Attribute.Цена" id="3216e112-8e3d-4523-8d24-7e123b7d99e7"/>
+			<Metadata name="Catalog.Номенклатура.Attribute.Артикул" id="76c480ee-14dc-4ffc-8672-8f29a1050fde"/>
+			<Metadata name="Catalog.Номенклатура.TabularSection.Поставщики.Attribute.ДатаПоставки" id="a2fb6cdd-202d-4fea-95ec-173b7fe27482"/>
+			<Metadata name="Catalog.Номенклатура.TabularSection.Дополнительно" id="c87de365-a649-4af0-a06f-82404fb6423e"/>
+		</Metadata>
+		<Metadata name="Catalog.Поставщики" id="daf996e3-6e19-4004-8fec-59b2aa08161c" configVersion="1a96dc0b343c824f85b2b52cc94fbb2b00000000"/>
+		<Metadata name="Catalog.Товары" id="0a43ecfa-f30d-4da3-8048-b8602e9a7815" configVersion="fe9e8bde5c53364d90e042236770d3df00000000"/>
+		<Metadata name="CommonModule.CommonModule1" id="29b08ff5-562b-4d96-a848-85e24ff79b73" configVersion="06e93195f3b3aa4f9f0c1884a6e0876400000000"/>
+		<Metadata name="CommonModule.ОбщегоНазначения" id="593485f9-cf9b-4862-8a2a-a66900810006" configVersion="0f530e3440085142b0ed14a3144b072400000000"/>
+		<Metadata name="Configuration.Configuration" id="0f1d8a27-c5e5-432e-b564-8f1a037af2b1" configVersion="be1edca68ea8ef468bcac50272d01f7c00000000"/>
+		<Metadata name="Document.Addit" id="dbcd2a3c-24ab-4ced-a457-84b5defb518f" configVersion="1670f2aead9ecb40a20ea54732d8d7c500000000"/>
+		<Metadata name="Document.Exp" id="7db66456-ac49-4ecd-aa2f-ef169f816c5b" configVersion="d42a0d71b7539c478be220574566851400000000"/>
+		<Metadata name="Document.МойДокумент" id="35717106-b8e9-4750-b393-cadf251c5684" configVersion="e5ee0f421f38aa4faa3dfe27d113714200000000"/>
+		<Metadata name="Language.English" id="653444ce-62ad-4183-8a15-bb6c594c89c6" configVersion="be2ddc2ebb56114084d2f28baa60ec1f00000000"/>
+	</ConfigVersions>
+</ConfigDumpInfo>
