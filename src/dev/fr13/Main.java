@@ -16,115 +16,21 @@ public class Main {
 
     private static String sourceDirectory = "";
 
-    public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException, XPathExpressionException {
-
-        // add exit code
-        parseArgs(args);
-        if (sourceDirectory.isEmpty()) {
-            printHelp();
-            return;
-        }
-
-        // check valid data
-        Path path = Paths.get(sourceDirectory);
-        if (Files.notExists(path))
-            throw new IllegalArgumentException("no such directory: " + path.toString());
-
-        long startTime = System.currentTimeMillis();
-
-        // Firstly processing file with common objects
-        Document mainConfig = domDocument();
-        Node parentNode = mainConfig.getElementsByTagName("ChildObjects").item(0);
-        if (!parentNode.hasChildNodes())
-            return;
-
-        String nodeName = "";
-        //List<String> sortedObjectsNames = new ArrayList<String>();
-        Map<String, Node> treeMap = new TreeMap<String, Node>();
-
-        List<Node> childNodes = new ArrayList<Node>();
-        //Node parentNodeEmpty = parentNode.cloneNode(false);
-        Node parentNodeEmpty = mainConfig.importNode(parentNode, false);
-
-        NodeList unsortedObjects = parentNode.getChildNodes();
-        for (int i = 0; i < unsortedObjects.getLength(); i++) {
-
-            Node currentUnsortedNode = unsortedObjects.item(i);
-            if (currentUnsortedNode.getNodeType() != Node.ELEMENT_NODE)
-                continue;
-
-            if (!nodeName.equals(currentUnsortedNode.getNodeName())) {
-
-                for (Map.Entry e:treeMap.entrySet()) {
-                    Node n = (Node) e.getValue();
-                    Node node = n.cloneNode(true);
-                    parentNodeEmpty.appendChild(node);
-                }
-
-                //sortedObjectsNames.clear();
-                treeMap.clear();
-
-            }
-
-            String currentNodeText = currentUnsortedNode.getTextContent();
-            treeMap.put(currentNodeText, currentUnsortedNode);
-            //sortedObjectsNames.add(currentNodeText);
-            nodeName = currentUnsortedNode.getNodeName();
-        }
-
-        if (treeMap.size() != 0) {
-
-            for (Map.Entry e:treeMap.entrySet()) {
-                Node n = (Node) e.getValue();
-                Node node = n.cloneNode(true);
-                parentNodeEmpty.appendChild(node);
-            }
-        }
-
-        parentNode.getParentNode().replaceChild(parentNodeEmpty, parentNode);
-
-        long estimatedTime  = System.currentTimeMillis() - startTime;
-        System.out.println("Spent processing time: " + String.format(
-                "%d min, %d sec",
-                TimeUnit.MILLISECONDS.toMinutes(estimatedTime),
-                TimeUnit.MILLISECONDS.toSeconds(estimatedTime)));
-
-        // del
-        NodeList childTemp = mainConfig.getElementsByTagName("ChildObjects");
-
-        if (!childTemp.item(0).hasChildNodes())
-            return;
-
-        NodeList listTemp = childTemp.item(0).getChildNodes();
-        for (int i = 0; i < listTemp.getLength(); i++) {
-
-            Node node = listTemp.item(i);
-            if (node.getNodeType() != Node.ELEMENT_NODE)
-                continue;
-
-            System.out.println(listTemp.item(i).getTextContent());
-
-        }
+    public static void userMessage(String msg) {
+        System.out.println(msg);
     }
 
-    private static void printHelp() {
-        System.out.println("MetadataSorting sorts metadata for 1C:Enterprise solutions");
+    public static void userMessage() {
         System.out.println();
-        System.out.println("Use the -p or --path to set directory path with metadata");
     }
 
-    private static String pathToMainConfig() {
-        return sourceDirectory + File.separatorChar + "Configuration.xml";
-    }
-
-    private static Document domDocument() throws ParserConfigurationException, IOException, SAXException {
+    private static Document domDocument(String filename) throws ParserConfigurationException, IOException, SAXException {
 
         Document document = null;
         try {
-            File file = new File(sourceDirectory);
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            document = builder.parse(pathToMainConfig());
+            document = builder.parse(filename);
         } catch (ParserConfigurationException parserConfigurationException) {
             parserConfigurationException.printStackTrace();
         } catch (IOException e) {
@@ -137,6 +43,176 @@ public class Main {
 
         return document;
 
+    }
+
+    private static void importSortedNodes(Map tree, Node node) {
+
+        tree.forEach((k,v)->{
+            Node n = (Node) v;
+            Node cloneNode = n.cloneNode(true);
+            node.appendChild(cloneNode);
+            //userMessage((String) k);
+        });
+
+        tree.clear();
+
+    }
+
+    private static NodeList getChildNodes(Node node, String path)  throws XPathExpressionException {
+        XPath xPath = XPathFactory.newInstance().newXPath();
+        //xPath.setNamespaceContext(new NamespaceResolver(node));
+        XPathExpression expr = xPath.compile(path);
+        Object result = expr.evaluate(node, XPathConstants.NODESET);
+        return (NodeList) result;
+    }
+
+    private static void sortFileNodes(String fileName) throws ParserConfigurationException, IOException, SAXException, XPathExpressionException {
+
+        Document document = domDocument(fileName);
+        Node parentNode = document.getElementsByTagName("ChildObjects").item(0);
+        if (!parentNode.hasChildNodes())
+            return;
+
+        Node parentNodeEmpty = document.importNode(parentNode, false);
+
+        Map<String, Node> treeMap = new TreeMap<String, Node>();
+
+        // attributes
+        NodeList childNodes = getChildNodes(parentNode, "//Catalog/ChildObjects/Attribute");
+        for (int i=0; i < childNodes.getLength(); i++) {
+
+            String key = getChildNodes(childNodes.item(i), "Properties/Name").item(0).getTextContent();
+            treeMap.put(key, childNodes.item(i));
+
+        }
+
+        importSortedNodes(treeMap, parentNodeEmpty);
+
+        // tabular sections
+        NodeList childNodest = getChildNodes(parentNode, "//Catalog/ChildObjects/TabularSection");
+        for (int i=0; i < childNodest.getLength(); i++) {
+
+            String key = getChildNodes(childNodest.item(i), "Properties/Name").item(0).getTextContent();
+            treeMap.put(key, childNodest.item(i));
+
+        }
+
+        importSortedNodes(treeMap, parentNodeEmpty);
+
+        // attributes of tabular sections for parentNodeEmpty
+
+
+    }
+
+    private static void sortMainConfig(String fileName) throws ParserConfigurationException, IOException, SAXException  {
+
+        Document document = domDocument(fileName);
+        Node parentNode = document.getElementsByTagName("ChildObjects").item(0);
+        if (!parentNode.hasChildNodes())
+            return;
+
+        String nodeName = "";
+        Map<String, Node> treeMap = new TreeMap<String, Node>();
+
+        Node parentNodeEmpty = document.importNode(parentNode, false);
+
+        NodeList unsortedObjects = parentNode.getChildNodes();
+        for (int i = 0; i < unsortedObjects.getLength(); i++) {
+
+            Node currentUnsortedNode = unsortedObjects.item(i);
+            if (currentUnsortedNode.getNodeType() != Node.ELEMENT_NODE)
+                continue;
+
+            if (!nodeName.equals(currentUnsortedNode.getNodeName())) {
+
+                importSortedNodes(treeMap, parentNodeEmpty);
+
+            }
+
+            String currentNodeText = currentUnsortedNode.getTextContent();
+            treeMap.put(currentNodeText, currentUnsortedNode);
+            nodeName = currentUnsortedNode.getNodeName();
+        }
+
+        if (treeMap.size() != 0)
+            importSortedNodes(treeMap, parentNodeEmpty);
+
+        parentNode.getParentNode().replaceChild(parentNodeEmpty, parentNode);
+
+        // print results
+        NodeList childTemp = document.getElementsByTagName("ChildObjects");
+
+        if (!childTemp.item(0).hasChildNodes())
+            return;
+
+        NodeList listTemp = childTemp.item(0).getChildNodes();
+        for (int i = 0; i < listTemp.getLength(); i++) {
+
+            Node node = listTemp.item(i);
+            if (node.getNodeType() != Node.ELEMENT_NODE)
+                continue;
+
+            userMessage(listTemp.item(i).getTextContent());
+
+        }
+
+    }
+
+    public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException, XPathExpressionException {
+
+        // add exit code
+        parseArgs(args);
+        if (sourceDirectory.isEmpty()) {
+            printHelp();
+            return;
+        }
+
+        Path path;
+        FileFilter filter;
+
+        path = Paths.get(sourceDirectory);
+        if (Files.notExists(path))
+            throw new IllegalArgumentException("no such directory: " + path.toString());
+
+        long startTime = System.currentTimeMillis();
+
+        String fileName;
+        fileName = pathToMainConfig();
+        //sortMainConfig(fileName);
+
+        path = Paths.get(sourceDirectory + File.separatorChar + "Catalogs");
+        if (Files.exists(path)) {
+            
+            File directoryFiles = new File(path.toString());
+            File[] listOfFiles = directoryFiles.listFiles(new FilenameFilter() {
+                @Override
+                public boolean accept(File dir, String name) {
+                    return name.endsWith(".xml");
+                }
+            });
+
+            for (File file:listOfFiles) {
+                sortFileNodes(file.getPath());
+                
+            }
+        }
+
+        long estimatedTime  = System.currentTimeMillis() - startTime;
+        userMessage("Spent processing time: " + String.format(
+                "%d min, %d sec",
+                TimeUnit.MILLISECONDS.toMinutes(estimatedTime),
+                TimeUnit.MILLISECONDS.toSeconds(estimatedTime)));
+
+    }
+
+    private static void printHelp() {
+        userMessage("MetadataSorting sorts metadata for 1C:Enterprise solutions");
+        userMessage();
+        userMessage("Use the -p or --path to set directory path with metadata");
+    }
+
+    private static String pathToMainConfig() {
+        return sourceDirectory + File.separatorChar + "Configuration.xml";
     }
 
     private static void parseArgs(String[] args) {
