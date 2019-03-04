@@ -16,23 +16,23 @@ public class Main {
 
     private static String sourceDirectory = "";
 
-    public static void userMessage(String msg) {
+    private static void userMessage(String msg) {
         System.out.println(msg);
     }
 
-    public static void userMessage() {
+    private static void userMessage() {
         System.out.println();
     }
 
-    private static Document domDocument(String filename) throws ParserConfigurationException, IOException, SAXException {
+    private static Document domDocument(File file) {
 
         Document document = null;
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            document = builder.parse(filename);
-        } catch (ParserConfigurationException parserConfigurationException) {
-            parserConfigurationException.printStackTrace();
+            document = builder.parse(file);
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
@@ -66,16 +66,16 @@ public class Main {
         return (NodeList) result;
     }
 
-    private static void sortFileNodes(String fileName) throws ParserConfigurationException, IOException, SAXException, XPathExpressionException {
+    private static void sortFileNodes(File file) throws ParserConfigurationException, IOException, SAXException, XPathExpressionException {
 
-        Document document = domDocument(fileName);
+        Document document = domDocument(file);
         Node parentNode = document.getElementsByTagName("ChildObjects").item(0);
         if (!parentNode.hasChildNodes())
             return;
 
         Node parentNodeEmpty = document.importNode(parentNode, false);
 
-        Map<String, Node> treeMap = new TreeMap<String, Node>();
+        Map<String, Node> treeMap = new TreeMap<>();
 
         // attributes
         NodeList childNodes = getChildNodes(parentNode, "//Catalog/ChildObjects/Attribute");
@@ -104,16 +104,17 @@ public class Main {
 
     }
 
-    private static void sortMainConfig(String fileName) throws ParserConfigurationException, IOException, SAXException  {
+    private static void sortMainConfig(File file) throws ParserConfigurationException, IOException, SAXException  {
 
-        Document document = domDocument(fileName);
+        Document document = domDocument(file);
         Node parentNode = document.getElementsByTagName("ChildObjects").item(0);
         if (!parentNode.hasChildNodes())
             return;
 
         String nodeName = "";
-        Map<String, Node> treeMap = new TreeMap<String, Node>();
+        Map<String, Node> treeMap = new TreeMap<>();
 
+        // TODO skip subsystems
         Node parentNodeEmpty = document.importNode(parentNode, false);
 
         NodeList unsortedObjects = parentNode.getChildNodes();
@@ -184,15 +185,10 @@ public class Main {
         if (Files.exists(path)) {
             
             File directoryFiles = new File(path.toString());
-            File[] listOfFiles = directoryFiles.listFiles(new FilenameFilter() {
-                @Override
-                public boolean accept(File dir, String name) {
-                    return name.endsWith(".xml");
-                }
-            });
+            File[] listOfFiles = directoryFiles.listFiles((dir, name) -> name.endsWith(".xml"));
 
             for (File file:listOfFiles) {
-                sortFileNodes(file.getPath());
+                sortFileNodes(file);
                 
             }
         }
@@ -224,7 +220,7 @@ public class Main {
             return;
         }
 
-        Boolean printHelp = false;
+        boolean printHelp = false;
         for (int i=0; i < args.length; i++) {
 
             switch (args[i]) {
