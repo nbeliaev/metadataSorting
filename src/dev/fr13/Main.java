@@ -66,7 +66,7 @@ public class Main {
         return (NodeList) result;
     }
 
-    private static void sortFileNodes(File file) throws ParserConfigurationException, IOException, SAXException, XPathExpressionException {
+    private static void sortFileNodes(File file, Node metaObject) throws ParserConfigurationException, IOException, SAXException, XPathExpressionException {
 
         Document document = domDocument(file);
         Node parentNode = document.getElementsByTagName("ChildObjects").item(0);
@@ -75,10 +75,28 @@ public class Main {
 
         Node parentNodeEmpty = document.importNode(parentNode, false);
 
+        NodeList childNodes = metaObject.getChildNodes();
+        for (int i = 0; i < childNodes.getLength(); i++) {
+
+            Node node = childNodes.item(i);
+            if (node.getNodeType() != Node.ELEMENT_NODE)
+                continue;
+
+            NamedNodeMap attributes = metaObject.getAttributes();
+            String pathPrefix = getAttributeValue(attributes, "pathPrefix");
+
+            // TODO
+            userMessage(pathPrefix +node.getTextContent());
+        }
+
+
+
         Map<String, Node> treeMap = new TreeMap<>();
 
+
+
         // attributes
-        NodeList childNodes = getChildNodes(parentNode, "//Catalog/ChildObjects/Attribute");
+        /*NodeList childNodes = getChildNodes(parentNode, "//Catalog/ChildObjects/Attribute");
         for (int i=0; i < childNodes.getLength(); i++) {
 
             String key = getChildNodes(childNodes.item(i), "Properties/Name").item(0).getTextContent();
@@ -97,7 +115,7 @@ public class Main {
 
         }
 
-        importSortedNodes(treeMap, parentNodeEmpty);
+        importSortedNodes(treeMap, parentNodeEmpty);*/
 
         // attributes of tabular sections for parentNodeEmpty
 
@@ -169,7 +187,6 @@ public class Main {
         }
 
         Path path;
-        FileFilter filter;
 
         path = Paths.get(sourceDirectory);
         if (Files.notExists(path))
@@ -178,19 +195,61 @@ public class Main {
         long startTime = System.currentTimeMillis();
 
         String fileName;
-        fileName = pathToMainConfig();
-        //sortMainConfig(fileName);
+        //sortMainConfig(sourceDirectory + File.separatorChar + "Configuration.xml");
 
-        path = Paths.get(sourceDirectory + File.separatorChar + "Catalogs");
-        if (Files.exists(path)) {
-            
-            File directoryFiles = new File(path.toString());
-            File[] listOfFiles = directoryFiles.listFiles((dir, name) -> name.endsWith(".xml"));
+        path = Paths.get(sourceDirectory + File.separatorChar + "ConfigDescription.xml");
+        if (Files.notExists(path)) {
+            userMessage("Parent objects have been sorted. \n" +
+                    "To sort the attributes of objects, you need to place the ConfigDescription.xml file in the folder with the configuration files.");
+            return;
+        }
 
-            for (File file:listOfFiles) {
-                sortFileNodes(file);
-                
+        Document configDescription = domDocument(path.toFile());
+        NodeList list = configDescription.getElementsByTagName("MetaDataDescription");
+        if (list.getLength() != 1) {
+            userMessage("Invalid format of ConfigDescription");
+            return;
+        }
+
+        Node metaDataDescription = list.item(0);
+        if (!metaDataDescription.hasChildNodes()) {
+            return;
+        }
+
+        NodeList metaObjects = metaDataDescription.getChildNodes();
+        for (int i = 0; i < metaObjects.getLength(); i++) {
+
+            Node metaObject = metaObjects.item(i);
+            if (metaObject.getNodeType() != Node.ELEMENT_NODE)
+                continue;
+
+            if (!metaObject.hasAttributes()) {
+                userMessage("Invalid format of ConfigDescription");
+                return;
             }
+
+            NamedNodeMap attributes = metaObject.getAttributes();
+
+            String folder = getAttributeValue(attributes, "folder");
+            path = Paths.get(sourceDirectory + File.separatorChar + folder);
+            if (Files.exists(path)) {
+
+                 /*ObjectDescription objectDescription = new ObjectDescription(
+                        getAttributeValue(attributes, "pathPrefix"),
+                        getAttributeValue(attributes, "name"));*/
+
+                // TODO add to class method sort
+
+                File[] listOfFiles = path.toFile().listFiles((dir, name) -> name.endsWith(".xml"));
+
+                for (File file:listOfFiles) {
+                    sortFileNodes(file, metaObject);
+                }
+            }
+
+            //objectDescription description = new objectDescription(folder);
+
+
         }
 
         long estimatedTime  = System.currentTimeMillis() - startTime;
@@ -198,6 +257,16 @@ public class Main {
                 "%d min, %d sec",
                 TimeUnit.MILLISECONDS.toMinutes(estimatedTime),
                 TimeUnit.MILLISECONDS.toSeconds(estimatedTime)));
+
+    }
+
+    private static String getAttributeValue(NamedNodeMap attributes, String name) throws IllegalArgumentException{
+
+        Node node = attributes.getNamedItem(name);
+        if (node == null) {
+            throw new IllegalArgumentException("Invalid format of ConfigDescription");
+        }
+        return node.getTextContent();
 
     }
 
@@ -246,6 +315,26 @@ public class Main {
 
     }
 
+    private static class ObjectDescription {
+
+        private String pathPrefix;
+        private String name;
+
+        ObjectDescription(String pathPrefix, String name) {
+            this.pathPrefix = pathPrefix;
+            this.name = name;
+        }
+
+        ObjectDescription(String pathPrefix) {
+            this.pathPrefix = pathPrefix;
+        }
+
+      void setAttributes(String pathPrefix, String name) {
+          this.pathPrefix = pathPrefix;
+          this.name = name;
+      }
+
+    }
 }
 
                /* Collections.sort(sortedObjectsNames);

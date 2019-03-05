@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MetaDataDescription>
+	<Catalog folder = "Catalogs" pathPrefix = "//Catalog/ChildObjects/" name = "Properties/Name">
+		<Attributes>Attribute</Attributes>
+		<Forms name = "">Form</Forms>
+		<Templates name = "">Template</Templates>
+		<TabularSections>TabularSection</TabularSections>
+		<TabularSectionAttributes pathPrefix = "TabularSection/ChildObjects">Attribute</TabularSectionAttributes>
+		<Comands>Command</Comands>
+	</Catalog>
+	<Document folder = "Documents">
+		<Attributes name = "Properties/Name">//Document/ChildObjects/Attribute</Attributes>
+		<Forms>//Document/ChildObjects/Form</Forms>
+		<Templates>//Document/ChildObjects/Template</Templates>
+		<TabularSections name = "Properties/Name">//Document/ChildObjects/TabularSection</TabularSections>
+		<TabularSectionAttributes name = "Properties/Name">TabularSection/ChildObjects/Attribute</TabularSectionAttributes>
+		<Comands name = "Properties/Name">//Document/ChildObjects/Command</Comands>
+	</Document>
+	<!-- Documents jornal -->
+	<Enum folder = "Enums">
+		<Attributes name = "Properties/Name">//Enum/ChildObjects/EnumValue</Attributes>
+	</Enum>
+	<Report folder = "Reports">
+		<Attributes name = "Properties/Name">//Report/ChildObjects/Attribute</Attributes>
+		<Forms>//Report/ChildObjects/Form</Forms>
+		<Templates>//Report/ChildObjects/Template</Templates>
+		<TabularSections name = "Properties/Name">//Report/ChildObjects/TabularSection</TabularSections>
+		<TabularSectionAttributes name = "Properties/Name">TabularSection/ChildObjects/Attribute</TabularSectionAttributes>
+		<Comands name = "Properties/Name">//Report/ChildObjects/Command</Comands>
+	</Report>
+	<DataProcessor folder = "DataProcessors">
+		<Attributes name = "Properties/Name">//DataProcessor/ChildObjects/Attribute</Attributes>
+		<Forms>//DataProcessor/ChildObjects/Form</Forms>
+		<Templates>//DataProcessor/ChildObjects/Template</Templates>
+		<TabularSections name = "Properties/Name">//DataProcessor/ChildObjects/TabularSection</TabularSections>
+		<TabularSectionAttributes name = "Properties/Name">TabularSection/ChildObjects/Attribute</TabularSectionAttributes>
+		<Comands name = "Properties/Name">//DataProcessor/ChildObjects/Command</Comands>
+	</DataProcessor>
+	<ChartOfCharacteristicType folder = "ChartsOfCharacteristicTypes">
+		<Attributes name = "Properties/Name">//ChartOfCharacteristicTypes/ChildObjects/Attribute</Attributes>
+		<Forms>//ChartOfCharacteristicTypes/ChildObjects/Form</Forms>
+		<Templates>//ChartOfCharacteristicTypes/ChildObjects/Template</Templates>
+		<TabularSections name = "Properties/Name">//ChartOfCharacteristicTypes/ChildObjects/TabularSection</TabularSections>
+		<TabularSectionAttributes name = "Properties/Name">TabularSection/ChildObjects/Attribute</TabularSectionAttributes>
+		<Comands name = "Properties/Name">//ChartOfCharacteristicTypes/ChildObjects/Command</Comands>
+	</ChartOfCharacteristicType>
+	<BusinessProcess folder = "BusinessProcesses">
+		<Attributes name = "Properties/Name">//BusinessProcess/ChildObjects/Attribute</Attributes>
+		<Forms>//BusinessProcess/ChildObjects/Form</Forms>
+		<Templates>//BusinessProcess/ChildObjects/Template</Templates>
+		<TabularSections name = "Properties/Name">//BusinessProcess/ChildObjects/TabularSection</TabularSections>
+		<TabularSectionAttributes name = "Properties/Name">TabularSection/ChildObjects/Attribute</TabularSectionAttributes>
+		<Comands name = "Properties/Name">//BusinessProcess/ChildObjects/Command</Comands>
+	</BusinessProcess>
+	<Task folder = "Tasks">
+		<Attributes name = "Properties/Name">//Task/ChildObjects/Attribute</Attributes>
+		<Attributes name = "Properties/Name">//Task/ChildObjects/AddressingAttribute</Attributes>
+		<Forms>//Task/ChildObjects/Form</Forms>
+		<Templates>//Task/ChildObjects/Template</Templates>
+		<TabularSections name = "Properties/Name">//Task/ChildObjects/TabularSection</TabularSections>
+		<TabularSectionAttributes name = "Properties/Name">TabularSection/ChildObjects/Attribute</TabularSectionAttributes>
+		<Comands name = "Properties/Name">//Task/ChildObjects/Command</Comands>
+	</Task>
+</MetaDataDescription>
