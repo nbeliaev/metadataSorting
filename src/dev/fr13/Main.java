@@ -75,18 +75,42 @@ public class Main {
 
         Node parentNodeEmpty = document.importNode(parentNode, false);
 
-        NodeList childNodes = metaObject.getChildNodes();
-        for (int i = 0; i < childNodes.getLength(); i++) {
+        NamedNodeMap metaAttributes = metaObject.getAttributes();
+        String parentPathPrefix = getAttributeValue(metaAttributes, "pathPrefix");
+        String parentName = getAttributeValue(metaAttributes, "name");
 
-            Node node = childNodes.item(i);
-            if (node.getNodeType() != Node.ELEMENT_NODE)
+        NodeList metaNodes = metaObject.getChildNodes();
+        for (int i = 0; i < metaNodes.getLength(); i++) {
+
+            Node metaNode = metaNodes.item(i);
+            if (metaNode.getNodeType() != Node.ELEMENT_NODE)
                 continue;
 
-            NamedNodeMap attributes = metaObject.getAttributes();
-            String pathPrefix = getAttributeValue(attributes, "pathPrefix");
+            NodeList nodes = getChildNodes(document,parentPathPrefix+metaNode.getTextContent());
+            for (int j = 0; j < nodes.getLength(); j++) {
 
-            // TODO
-            userMessage(pathPrefix +node.getTextContent());
+                // attribute, form, template etc.
+                Node node = nodes.item(j);
+
+                if (node.getNodeType() != Node.ELEMENT_NODE)
+                    continue;
+
+                // TODO
+                userMessage(node.getNodeName());
+
+                //String childPathPrefix = getAttributeValue(, "pathPrefix");
+                //String childName = getAttributeValue(list.item(i).getAttributes(), "name");
+
+                /*NodeList list1 = getChildNodes(list.item(j), childName.isEmpty() ? name:childName);
+                for (int k = 0; k < list1.getLength(); k++) {
+                    if (list1.item(k).getNodeType() != Node.ELEMENT_NODE)
+                        continue;
+
+                    userMessage(list1.item(k).getTextContent());
+                }*/
+
+            }
+
         }
 
 
