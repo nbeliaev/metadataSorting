@@ -51,7 +51,7 @@ public class Main {
             Node n = (Node) v;
             Node cloneNode = n.cloneNode(true);
             node.appendChild(cloneNode);
-            //userMessage((String) k);
+            userMessage((String) k);
         });
 
         tree.clear();
@@ -66,6 +66,10 @@ public class Main {
         return (NodeList) result;
     }
 
+    /*
+    @file object metadata in xml
+    @metaObject parent node from ConfigDescription for current object
+    */
     private static void sortFileNodes(File file, Node metaObject) throws ParserConfigurationException, IOException, SAXException, XPathExpressionException {
 
         Document document = domDocument(file);
@@ -75,9 +79,9 @@ public class Main {
 
         Node parentNodeEmpty = document.importNode(parentNode, false);
 
-        NamedNodeMap metaAttributes = metaObject.getAttributes();
-        String parentPathPrefix = getAttributeValue(metaAttributes, "pathPrefix");
-        String parentName = getAttributeValue(metaAttributes, "name");
+        NamedNodeMap parentMetaAttributes = metaObject.getAttributes();
+        String parentPathPrefix = getAttributeValue(parentMetaAttributes, "pathPrefix");
+        String parentName = getAttributeValue(parentMetaAttributes, "name");
 
         NodeList metaNodes = metaObject.getChildNodes();
         for (int i = 0; i < metaNodes.getLength(); i++) {
@@ -86,7 +90,16 @@ public class Main {
             if (metaNode.getNodeType() != Node.ELEMENT_NODE)
                 continue;
 
-            NodeList nodes = getChildNodes(document,parentPathPrefix+metaNode.getTextContent());
+            NamedNodeMap childMetaAttributes = metaNode.getAttributes();
+
+            String childPathPrefix = childMetaAttributes.getLength() != 0 ? getAttributeValue(childMetaAttributes, "pathPrefix"):"";
+            String childName = childMetaAttributes.getLength() != 0 ? getAttributeValue(childMetaAttributes, "name"):"";
+            String currentPathPrefix = childPathPrefix.isEmpty() ? parentPathPrefix : childPathPrefix;
+            String currentName = childName.isEmpty() ? parentName : childName;
+
+            Map<String, Node> treeMap = new TreeMap<>();
+
+            NodeList nodes = getChildNodes(document,currentPathPrefix+metaNode.getTextContent());
             for (int j = 0; j < nodes.getLength(); j++) {
 
                 // attribute, form, template etc.
@@ -95,54 +108,36 @@ public class Main {
                 if (node.getNodeType() != Node.ELEMENT_NODE)
                     continue;
 
-                // TODO
-                userMessage(node.getNodeName());
+                NodeList list = getChildNodes(node, currentName);
+                for (int k = 0; k < list.getLength(); k++) {
 
-                //String childPathPrefix = getAttributeValue(, "pathPrefix");
-                //String childName = getAttributeValue(list.item(i).getAttributes(), "name");
+                    Node attribute = list.item(k);
 
-                /*NodeList list1 = getChildNodes(list.item(j), childName.isEmpty() ? name:childName);
-                for (int k = 0; k < list1.getLength(); k++) {
-                    if (list1.item(k).getNodeType() != Node.ELEMENT_NODE)
+                    if (attribute.getNodeType() != Node.ELEMENT_NODE)
                         continue;
 
-                    userMessage(list1.item(k).getTextContent());
-                }*/
+                    //userMessage(node.getNodeName() + ": " + attribute.getTextContent());
+                    treeMap.put(attribute.getTextContent(), node);
+
+                }
+
+                importSortedNodes(treeMap, parentNodeEmpty);
+                treeMap.clear();
 
             }
 
         }
 
+        /*NodeList l = parentNodeEmpty.getChildNodes();
+        for (int m = 0; m < l.getLength(); m++) {
 
+            Node n = l.item(m);
 
-        Map<String, Node> treeMap = new TreeMap<>();
+            if (n.getNodeType() != Node.ELEMENT_NODE)
+                continue;
 
-
-
-        // attributes
-        /*NodeList childNodes = getChildNodes(parentNode, "//Catalog/ChildObjects/Attribute");
-        for (int i=0; i < childNodes.getLength(); i++) {
-
-            String key = getChildNodes(childNodes.item(i), "Properties/Name").item(0).getTextContent();
-            treeMap.put(key, childNodes.item(i));
-
-        }
-
-        importSortedNodes(treeMap, parentNodeEmpty);
-
-        // tabular sections
-        NodeList childNodest = getChildNodes(parentNode, "//Catalog/ChildObjects/TabularSection");
-        for (int i=0; i < childNodest.getLength(); i++) {
-
-            String key = getChildNodes(childNodest.item(i), "Properties/Name").item(0).getTextContent();
-            treeMap.put(key, childNodest.item(i));
-
-        }
-
-        importSortedNodes(treeMap, parentNodeEmpty);*/
-
-        // attributes of tabular sections for parentNodeEmpty
-
+            userMessage(n.getTextContent());
+        }*/
 
     }
 
@@ -284,13 +279,10 @@ public class Main {
 
     }
 
-    private static String getAttributeValue(NamedNodeMap attributes, String name) throws IllegalArgumentException{
+    private static String getAttributeValue(NamedNodeMap attributes, String name){
 
         Node node = attributes.getNamedItem(name);
-        if (node == null) {
-            throw new IllegalArgumentException("Invalid format of ConfigDescription");
-        }
-        return node.getTextContent();
+        return node != null ? node.getTextContent():"";
 
     }
 
