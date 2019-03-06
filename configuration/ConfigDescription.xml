@@ -5,7 +5,7 @@
 		<Forms name = "">Form</Forms>
 		<Templates name = "">Template</Templates>
 		<TabularSections>TabularSection</TabularSections>
-		<TabularSectionAttributes pathPrefix = "TabularSection/ChildObjects">Attribute</TabularSectionAttributes>
+		<TabularSectionAttributes pathPrefix = "//TabularSection/ChildObjects/">Attribute</TabularSectionAttributes>
 		<Comands>Command</Comands>
 	</Catalog>
 </MetaDataDescription>

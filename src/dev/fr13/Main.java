@@ -4,6 +4,12 @@ import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.*;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.*;
 import java.io.*;
 import java.nio.file.Files;
@@ -51,7 +57,7 @@ public class Main {
             Node n = (Node) v;
             Node cloneNode = n.cloneNode(true);
             node.appendChild(cloneNode);
-            userMessage((String) k);
+            //userMessage((String) k);
         });
 
         tree.clear();
@@ -70,7 +76,7 @@ public class Main {
     @file object metadata in xml
     @metaObject parent node from ConfigDescription for current object
     */
-    private static void sortFileNodes(File file, Node metaObject) throws ParserConfigurationException, IOException, SAXException, XPathExpressionException {
+    private static void sortFileNodes(File file, Node metaObject) throws ParserConfigurationException, IOException, SAXException, XPathExpressionException, TransformerException {
 
         Document document = domDocument(file);
         Node parentNode = document.getElementsByTagName("ChildObjects").item(0);
@@ -99,7 +105,9 @@ public class Main {
 
             Map<String, Node> treeMap = new TreeMap<>();
 
+            //userMessage(currentPathPrefix+metaNode.getTextContent());
             NodeList nodes = getChildNodes(document,currentPathPrefix+metaNode.getTextContent());
+            //userMessage(Integer.toString(nodes.getLength()));
             for (int j = 0; j < nodes.getLength(); j++) {
 
                 // attribute, form, template etc.
@@ -109,6 +117,8 @@ public class Main {
                     continue;
 
                 NodeList list = getChildNodes(node, currentName);
+                //userMessage(currentPathPrefix+metaNode.getTextContent());
+                //userMessage(Integer.toString(getChildNodes(node, currentPathPrefix+metaNode.getTextContent()).getLength()));
                 for (int k = 0; k < list.getLength(); k++) {
 
                     Node attribute = list.item(k);
@@ -121,13 +131,15 @@ public class Main {
 
                 }
 
-                importSortedNodes(treeMap, parentNodeEmpty);
-                treeMap.clear();
-
             }
+
+            importSortedNodes(treeMap, parentNodeEmpty);
+            treeMap.clear();
 
         }
 
+        //TODO replace in document
+ 
         /*NodeList l = parentNodeEmpty.getChildNodes();
         for (int m = 0; m < l.getLength(); m++) {
 
@@ -138,6 +150,22 @@ public class Main {
 
             userMessage(n.getTextContent());
         }*/
+
+    }
+
+    private static void saveToFile(Node node) throws TransformerException {
+
+        TransformerFactory tFactory =
+                TransformerFactory.newInstance();
+        Transformer transformer =
+                tFactory.newTransformer();
+
+        DOMSource source = new DOMSource(node);
+        StringWriter writer = new StringWriter();
+        StreamResult result = new StreamResult(writer);
+        transformer.transform(source, result);
+        String strResult = writer.toString();
+        userMessage(strResult);
 
     }
 
@@ -196,7 +224,7 @@ public class Main {
 
     }
 
-    public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException, XPathExpressionException {
+    public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException, XPathExpressionException, TransformerException {
 
         // add exit code
         parseArgs(args);
