@@ -132,37 +132,40 @@
 			<DefaultConstantsForm/>
 		</Properties>
 		<ChildObjects>
+			<Language>Russian</Language>
 			<Language>English</Language>
-			<Language>Language1</Language>
-			<Subsystem>Покупки</Subsystem>
-			<Subsystem>Сотрудники</Subsystem>
-			<SessionParameter>ТекущийПользователь</SessionParameter>
-			<SessionParameter>РабочееМесто</SessionParameter>
-			<Role>ПолныеПрава</Role>
-			<Role>ТолькоПросмотр</Role>
-			<CommonModule>Покупки</CommonModule>
-			<CommonModule>ОбщегоНазначения</CommonModule>
-			<EventSubscription>ПокупкиПриКопировании</EventSubscription>
-			<EventSubscription>ПокупкиПриЗаписи</EventSubscription>
-			<ScheduledJob>ОтправкаОтчетов</ScheduledJob>
-			<ScheduledJob>ВыгрузкаНаСайт</ScheduledJob>
-			<Catalog>Поставщики</Catalog>
-			<Catalog>Номенклатура</Catalog>
-			<Catalog>Сотрудники</Catalog>
+			<Subsystem>Purchases</Subsystem>
+			<Subsystem>Employees</Subsystem>
+			<Subsystem>Administration</Subsystem>
+			<SessionParameter>CurrentUser</SessionParameter>
+			<SessionParameter>CurrentExchangeNode</SessionParameter>
+			<Role>FullRights</Role>
+			<Role>ViewOnly</Role>
+			<CommonModule>Purchases</CommonModule>
+			<CommonModule>CommonUse</CommonModule>
+			<CommonAttribute>Comment</CommonAttribute>
+			<CommonAttribute>DataSeparator</CommonAttribute>
+			<ExchangePlan>Full</ExchangePlan>
+			<EventSubscription>PurchasesOnCopy</EventSubscription>
+			<EventSubscription>PurchasesOnWrite</EventSubscription>
+			<ScheduledJob>ReportsSending</ScheduledJob>
+			<ScheduledJob>ExportData</ScheduledJob>
+			<Catalog>Vendors</Catalog>
+			<Catalog>Products</Catalog>
+			<Catalog>Employees</Catalog>
 			<Document>ExpireDate</Document>
 			<Document>AdditionalResourses</Document>
-			<Document>ПоступлениеТоваров</Document>
-			<Enum>ТипыТоваров</Enum>
-			<Enum>ВидОпераци</Enum>
-			<Report>Закупки</Report>
-			<Report>Выплаты</Report>
-			<DataProcessor>Установка</DataProcessor>
-			<ChartOfCharacteristicTypes>Реквизиты</ChartOfCharacteristicTypes>
-			<ChartOfCharacteristicTypes>ДатыВхода</ChartOfCharacteristicTypes>
-			<ChartOfAccounts>Управленческий</ChartOfAccounts>
+			<Document>VendorInvoice</Document>
+			<Enum>ProductKinds</Enum>
+			<Enum>OperationKinds</Enum>
+			<Report>Purchases</Report>
+			<Report>Payments</Report>
+			<DataProcessor>InitialSettings</DataProcessor>
+			<ChartOfCharacteristicTypes>Attributes</ChartOfCharacteristicTypes>
+			<ChartOfCharacteristicTypes>EnterDates</ChartOfCharacteristicTypes>
 			<BusinessProcess>BusinessProcess2</BusinessProcess>
 			<BusinessProcess>BusinessProcess1</BusinessProcess>
-			<Task>Задача</Task>
+			<Task>Task5</Task>
 			<Task>Task1</Task>
 		</ChildObjects>
 	</Configuration>

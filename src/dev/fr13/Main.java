@@ -4,10 +4,7 @@ import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.*;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.*;
@@ -99,22 +96,81 @@ public class Main {
             NamedNodeMap childMetaAttributes = metaNode.getAttributes();
 
             String childPathPrefix = childMetaAttributes.getLength() != 0 ? getAttributeValue(childMetaAttributes, "pathPrefix"):"";
-            String childName = childMetaAttributes.getLength() != 0 ? getAttributeValue(childMetaAttributes, "name"):"";
+            String childName = childMetaAttributes.getLength() != 0 ? getAttributeValue(childMetaAttributes, "category"):"";
+            // TODO
+            if (childName.isEmpty()) {
+                System.out.println(metaNode.getNodeName());
+            } else {
+                System.out.println(metaNode.getNodeName() + " simple");
+            }
             String currentPathPrefix = childPathPrefix.isEmpty() ? parentPathPrefix : childPathPrefix;
             String currentName = childName.isEmpty() ? parentName : childName;
 
             Map<String, Node> treeMap = new TreeMap<>();
 
-            //userMessage(currentPathPrefix+metaNode.getTextContent());
-            NodeList nodes = getChildNodes(document,currentPathPrefix+metaNode.getTextContent());
+            //userMessage(currentPathPrefix+metaNode.getNodeName());
+            //userMessage(Boolean.toString(metaNode.hasChildNodes()));
+            Boolean metaNodeHasChild = metaNode.hasChildNodes();
+
+            NodeList nodes = getChildNodes(document,currentPathPrefix+metaNode.getNodeName());
             //userMessage(Integer.toString(nodes.getLength()));
             for (int j = 0; j < nodes.getLength(); j++) {
 
-                // attribute, form, template etc.
+                // attributes, forms, templates etc.
                 Node node = nodes.item(j);
 
                 if (node.getNodeType() != Node.ELEMENT_NODE)
                     continue;
+
+
+
+                if (metaNodeHasChild) {
+                    NamedNodeMap chmetaattr = metaNode.getChildNodes().item(1).getAttributes();
+                    String childPathPrefix1 = chmetaattr.getLength() != 0 ? getAttributeValue(chmetaattr, "pathPrefix"):"";
+                    String uuid = getAttributeValue(node.getAttributes(), "uuid");
+                    childPathPrefix1 = childPathPrefix1.replace("$uuid", uuid);
+
+                    NodeList tabularSectionRows = getChildNodes(node, childPathPrefix1);
+                    if (tabularSectionRows.getLength() != 0) {
+
+                        Node tabularSectionRowsToImport = document.importNode(tabularSectionRows.item(0).getParentNode(), false);
+
+                        Map<String, Node> rowsTree = new TreeMap<>();
+
+                        for (int m = 0; m < tabularSectionRows.getLength(); m++) {
+
+                            Node attribute = tabularSectionRows.item(m);
+
+                            if (attribute.getNodeType() != Node.ELEMENT_NODE)
+                                continue;
+
+                            NodeList attributeRowsNames = getChildNodes(attribute, currentName);
+                            if (attributeRowsNames.getLength() != 1) {
+                                userMessage("Invalid format data");
+                                continue;
+                            }
+
+                            //userMessage(attributeRowsNames.item(0).getTextContent());
+                            //userMessage(node.getNodeName() + ": " + attribute.getTextContent());
+                            rowsTree.put(attribute.getTextContent(), attribute);
+
+                        }
+
+                        importSortedNodes(rowsTree, tabularSectionRowsToImport);
+                        node.replaceChild(tabularSectionRowsToImport, tabularSectionRows.item(0).getParentNode());
+
+                        //System.out.println(node.getTextContent());
+                        //System.out.println(node.getNodeName());
+                        //userMessage(childPathPrefix1);
+                        //System.out.println(getChildNodes(node, childPathPrefix1).getLength());
+                        //System.out.println("----------------------------");
+
+                        // в node вся таб часть. нужно найти в ней childObjects (реквизиты таб. части)
+                        // отсортировать их и добавить в пустой узел ChildObjects узла node
+                        // после этого node можно добавлять в treeMap
+                    }
+
+                }
 
                 NodeList list = getChildNodes(node, currentName);
                 //userMessage(currentPathPrefix+metaNode.getTextContent());
@@ -131,6 +187,8 @@ public class Main {
 
                 }
 
+
+
             }
 
             importSortedNodes(treeMap, parentNodeEmpty);
@@ -138,9 +196,10 @@ public class Main {
 
         }
 
-        //TODO replace in document
+        parentNode.getParentNode().replaceChild(parentNodeEmpty, parentNode);
+        saveToFile(document);
  
-        /*NodeList l = parentNodeEmpty.getChildNodes();
+    /*    NodeList l = parentNodeEmpty.getChildNodes();
         for (int m = 0; m < l.getLength(); m++) {
 
             Node n = l.item(m);
@@ -149,23 +208,22 @@ public class Main {
                 continue;
 
             userMessage(n.getTextContent());
-        }*/
-
+        }
+*/
     }
 
-    private static void saveToFile(Node node) throws TransformerException {
+    private static void saveToFile(Document document) throws TransformerException {
 
-        TransformerFactory tFactory =
-                TransformerFactory.newInstance();
-        Transformer transformer =
-                tFactory.newTransformer();
+        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
-        DOMSource source = new DOMSource(node);
+        DOMSource source = new DOMSource(document);
         StringWriter writer = new StringWriter();
         StreamResult result = new StreamResult(writer);
         transformer.transform(source, result);
         String strResult = writer.toString();
-        userMessage(strResult);
+        //userMessage("**********************************************");
+        //userMessage(strResult);
 
     }
 
@@ -281,21 +339,12 @@ public class Main {
             path = Paths.get(sourceDirectory + File.separatorChar + folder);
             if (Files.exists(path)) {
 
-                 /*ObjectDescription objectDescription = new ObjectDescription(
-                        getAttributeValue(attributes, "pathPrefix"),
-                        getAttributeValue(attributes, "name"));*/
-
-                // TODO add to class method sort
-
                 File[] listOfFiles = path.toFile().listFiles((dir, name) -> name.endsWith(".xml"));
 
                 for (File file:listOfFiles) {
                     sortFileNodes(file, metaObject);
                 }
             }
-
-            //objectDescription description = new objectDescription(folder);
-
 
         }
 
@@ -359,26 +408,6 @@ public class Main {
 
     }
 
-    private static class ObjectDescription {
-
-        private String pathPrefix;
-        private String name;
-
-        ObjectDescription(String pathPrefix, String name) {
-            this.pathPrefix = pathPrefix;
-            this.name = name;
-        }
-
-        ObjectDescription(String pathPrefix) {
-            this.pathPrefix = pathPrefix;
-        }
-
-      void setAttributes(String pathPrefix, String name) {
-          this.pathPrefix = pathPrefix;
-          this.name = name;
-      }
-
-    }
 }
 
                /* Collections.sort(sortedObjectsNames);

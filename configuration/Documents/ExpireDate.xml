@@ -87,7 +87,7 @@
 					</Synonym>
 					<Comment/>
 					<Type>
-						<v8:Type>cfg:EnumRef.ВидОпераци</v8:Type>
+						<v8:Type>cfg:EnumRef.OperationKinds</v8:Type>
 					</Type>
 					<PasswordMode>false</PasswordMode>
 					<Format/>
