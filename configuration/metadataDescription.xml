@@ -5,8 +5,8 @@
 		<TabularSection>
 			<TabularSectionRow pathPrefix="//TabularSection[@uuid='$uuid']/ChildObjects/Attribute"/>
 		</TabularSection>
-		<Form category = "simple"/>
-		<Template category = "simple"/>
+		<Form category="simple"/>
+		<Template category="simple"/>
 		<Command/>
 	</Catalog>
 </MetaDataDescription>

@@ -1,0 +1,23 @@
+           /* Collections.sort(sortedObjectsNames);
+
+                for (int j = 0; j < sortedObjectsNames.size(); j++) {
+
+                    XPath xPath = XPathFactory.newInstance().newXPath();
+                    xPath.setNamespaceContext(new NamespaceResolver(mainConfig));
+                    XPathExpression expr = xPath.compile("//ChildObjects/" + nodeName + "[contains(text(), '" + sortedObjectsNames.get(j) + "')]");
+                    Object result = expr.evaluate(parentNode, XPathConstants.NODESET);
+                    NodeList foundNodes = (NodeList) result;
+                    if (foundNodes == null) {
+                        // exeption?
+                        System.out.println("Could not sort file: Configuration.xml");
+                        return;
+                    }
+                    else if (foundNodes.getLength() != 1){
+                        System.out.println("Duplicates found in metadata names: " + sortedObjectsNames.get(j));
+                        return;
+                    }
+
+                    Node nodeForAdding = foundNodes.item(0).cloneNode(true);
+                    parentNodeEmpty.appendChild(nodeForAdding);
+
+                }*/
