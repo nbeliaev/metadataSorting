@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MetaDataDescription>
+	<ExchangePlan folder="ExchangePlans" pathPrefix="//ExchangePlan/ChildObjects/" pathName="Properties/Name">
+		<Attribute/>
+		<TabularSection>
+			<TabularSectionRow pathPrefix="//TabularSection[@uuid='$uuid']/ChildObjects/Attribute"/>
+		</TabularSection>
+		<Form category="simple"/>
+		<Template category="simple"/>
+		<Command/>
+	</ExchangePlan>
+	<Catalog folder="Catalogs" pathPrefix="//Catalog/ChildObjects/" pathName="Properties/Name">
+		<Attribute/>
+		<TabularSection>
+			<TabularSectionRow pathPrefix="//TabularSection[@uuid='$uuid']/ChildObjects/Attribute"/>
+		</TabularSection>
+		<Form category="simple"/>
+		<Template category="simple"/>
+		<Command/>
+	</Catalog>
+	<Document folder="Documents" pathPrefix="//Document/ChildObjects/" pathName="Properties/Name">
+		<Attribute/>
+		<TabularSection>
+			<TabularSectionRow pathPrefix="//TabularSection[@uuid='$uuid']/ChildObjects/Attribute"/>
+		</TabularSection>
+		<Form category="simple"/>
+		<Template category="simple"/>
+		<Command/>
+	</Document>
+	<DocumentJournal folder="DocumentJournals" pathPrefix="//DocumentJournal/ChildObjects/" pathName="Properties/Name">
+		<Column/>
+		<Form category="simple"/>
+		<Template category="simple"/>
+		<Command/>
+	</DocumentJournal>
+	<Enum folder="Enums" pathPrefix="//Enum/ChildObjects/" pathName="Properties/Name">
+		<EnumValue/>
+		<Form category="simple"/>
+		<Template category="simple"/>
+		<Command/>
+	</Enum>
+	<Report folder="Reports" pathPrefix="//Report/ChildObjects/" pathName="Properties/Name">
+		<Attribute/>
+		<TabularSection>
+			<TabularSectionRow pathPrefix="//TabularSection[@uuid='$uuid']/ChildObjects/Attribute"/>
+		</TabularSection>
+		<Form category="simple"/>
+		<Template category="simple"/>
+		<Command/>
+	</Report>
+	<DataProcessor folder="DataProcessors" pathPrefix="//DataProcessor/ChildObjects/" pathName="Properties/Name">
+		<Attribute/>
+		<TabularSection>
+			<TabularSectionRow pathPrefix="//TabularSection[@uuid='$uuid']/ChildObjects/Attribute"/>
+		</TabularSection>
+		<Form category="simple"/>
+		<Template category="simple"/>
+		<Command/>
+	</DataProcessor>
+	<ChartOfCharacteristicTypes folder="ChartsOfCharacteristicTypes" pathPrefix="//ChartOfCharacteristicTypes/ChildObjects/" pathName="Properties/Name">
+		<Attribute/>
+		<TabularSection>
+			<TabularSectionRow pathPrefix="//TabularSection[@uuid='$uuid']/ChildObjects/Attribute"/>
+		</TabularSection>
+		<Form category="simple"/>
+		<Template category="simple"/>
+		<Command/>
+	</ChartOfCharacteristicTypes>
+	<BusinessProcess folder="BusinessProcesses" pathPrefix="//BusinessProcess/ChildObjects/" pathName="Properties/Name">
+		<Attribute/>
+		<TabularSection>
+			<TabularSectionRow pathPrefix="//TabularSection[@uuid='$uuid']/ChildObjects/Attribute"/>
+		</TabularSection>
+		<Form category="simple"/>
+		<Template category="simple"/>
+		<Command/>
+	</BusinessProcess>
+	<Task folder="Tasks" pathPrefix="//Task/ChildObjects/" pathName="Properties/Name">
+		<Attribute/>
+		<AddressingAttribute/>
+		<TabularSection>
+			<TabularSectionRow pathPrefix="//TabularSection[@uuid='$uuid']/ChildObjects/Attribute"/>
+		</TabularSection>
+		<Form category="simple"/>
+		<Template category="simple"/>
+		<Command/>
+	</Task>
+</MetaDataDescription>

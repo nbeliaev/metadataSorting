@@ -13,8 +13,9 @@ public class PerformanceMeasurement {
     public static void printSpentTime() {
         long estimatedTime  = System.currentTimeMillis() - startTime;
         System.out.println("Spent processing time: " + String.format(
-                "%d min, %d sec",
+                "%d min, %d sec, %d msec",
                 TimeUnit.MILLISECONDS.toMinutes(estimatedTime),
-                TimeUnit.MILLISECONDS.toSeconds(estimatedTime)));
+                TimeUnit.MILLISECONDS.toSeconds(estimatedTime),
+                TimeUnit.MILLISECONDS.toMillis(estimatedTime)));
     }
 }

@@ -18,13 +18,6 @@ public class MetadataSorting {
 
     private static String sourceDirectory = "";
 
-    private static String getAttributeValue(NamedNodeMap attributes, String name){
-
-        Node node = attributes.getNamedItem(name);
-        return node != null ? node.getTextContent():"";
-
-    }
-
     private static void printHelp() {
         userMessage("MetadataSorting sorts metadata for 1C:Enterprise solutions \n" +
                 "Use the -p or --path to set directory path with metadata");
@@ -69,7 +62,14 @@ public class MetadataSorting {
         System.out.println(msg);
     }
 
-    private static Document domDocument(File file) {
+    private static String getAttributeValue(NamedNodeMap attributes, String name){
+
+        Node node = attributes.getNamedItem(name);
+        return node != null ? node.getTextContent():"";
+
+    }
+
+    private static Document getDomDocument(File file) {
 
         Document document = null;
         try {
@@ -99,11 +99,13 @@ public class MetadataSorting {
 
     }
 
-    private static NodeList getChildNodes(Node node, String path)  throws XPathExpressionException {
+    private static NodeList getChildNodes(Node node, String path) throws XPathExpressionException {
+
         XPath xPath = XPathFactory.newInstance().newXPath();
         XPathExpression expr = xPath.compile(path);
         Object result = expr.evaluate(node, XPathConstants.NODESET);
         return (NodeList) result;
+
     }
 
     private static void sortChildFileNodes(Node parentNode, Document documentToSort,  Node nodeDescription, String pathToNameNode) throws XPathExpressionException {
@@ -137,9 +139,6 @@ public class MetadataSorting {
             importSortedNodes(sortedNodes, nodeToReplace);
             parentNode.replaceChild(nodeToReplace, nodesToSort.item(0).getParentNode());
 
-            // в node вся таб часть. нужно найти в ней childObjects (реквизиты таб. части)
-            // отсортировать их и добавить в пустой узел ChildObjects узла node
-            // после этого node можно добавлять в treeMap
         }
 
     }
@@ -149,7 +148,7 @@ public class MetadataSorting {
     */
     private static void sortFileNodes(File file, Node metaObject) throws XPathExpressionException, TransformerException {
 
-        Document documentToSort = domDocument(file);
+        Document documentToSort = getDomDocument(file);
         Node parentNode = documentToSort.getElementsByTagName("ChildObjects").item(0);
         if (!parentNode.hasChildNodes()) {
             return;
@@ -159,7 +158,7 @@ public class MetadataSorting {
 
         NamedNodeMap parentMetaAttributes = metaObject.getAttributes();
         String parentPathPrefix = getAttributeValue(parentMetaAttributes, "pathPrefix");
-        String pathToNameNode = getAttributeValue(parentMetaAttributes, "name");
+        String pathToNameNode = getAttributeValue(parentMetaAttributes, "pathName");
 
         Map<String, Node> sortedNodes = new TreeMap<>();
 
@@ -195,7 +194,6 @@ public class MetadataSorting {
                     for (int k = 0; k < list.getLength(); k++) {
 
                         Node attribute = list.item(k);
-
                         if (attribute.getNodeType() != Node.ELEMENT_NODE)
                             continue;
 
@@ -219,28 +217,90 @@ public class MetadataSorting {
         }
 
         parentNode.getParentNode().replaceChild(nodeToReplace, parentNode);
-        saveToFile(documentToSort);
+        saveToFile(documentToSort, file);
 
     }
 
-    private static void saveToFile(Document document) throws TransformerException {
+    private static void saveToFile(Document document, File file) throws TransformerException {
 
         Transformer transformer = TransformerFactory.newInstance().newTransformer();
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 
         DOMSource source = new DOMSource(document);
-        StringWriter writer = new StringWriter();
-        StreamResult result = new StreamResult(writer);
+        StreamResult result = new StreamResult(file);
         transformer.transform(source, result);
-        String strResult = writer.toString();
-        //userMessage("**********************************************");
-        //userMessage(strResult);
 
     }
 
-    private static void sortMainConfig(File file) throws TransformerException  {
+    private static NodeList getMetaObjectsDescription() {
 
-        Document document = domDocument(file);
+        Node metaDataDescription = null;
+
+        Path path = Paths.get(sourceDirectory + File.separatorChar + "metadataDescription.xml");
+        if (Files.notExists(path)) {
+            userMessage("Parent objects have been sorted. \n" +
+                    "To sort the attributes of objects, you need to place the metadataDescription.xml file in the folder with the configuration files.");
+            return null;
+        }
+
+        try {
+            metaDataDescription = getDomDocument(path.toFile()).getElementsByTagName("MetaDataDescription").item(0);
+        } catch (IllegalArgumentException e) {
+            userMessage("Invalid format of metadataDescription");
+            System.exit(1);
+        }
+
+        if (!metaDataDescription.hasChildNodes()) {
+            return null;
+        }
+
+        return metaDataDescription.getChildNodes();
+
+    }
+
+    private static void sortDetails() throws XPathExpressionException, TransformerException {
+
+        NodeList metaObjects = getMetaObjectsDescription();
+        if (metaObjects == null) {
+            PerformanceMeasurement.printSpentTime();
+            return;
+        }
+
+        for (int i = 0; i < metaObjects.getLength(); i++) {
+
+            Node metaObject = metaObjects.item(i);
+            if (metaObject.getNodeType() != Node.ELEMENT_NODE)
+                continue;
+
+            if (!metaObject.hasAttributes()) {
+                userMessage("Invalid format of metadataDescription");
+                PerformanceMeasurement.printSpentTime();
+                return;
+            }
+
+            Path path = Paths.get(sourceDirectory);
+            NamedNodeMap attributes = metaObject.getAttributes();
+
+            String folder = getAttributeValue(attributes, "folder");
+            path = Paths.get(sourceDirectory + File.separatorChar + folder);
+            if (Files.exists(path)) {
+
+                userMessage(String.format("Processing of %s", folder));
+
+                File[] listOfFiles = path.toFile().listFiles((dir, name) -> name.endsWith(".xml"));
+                for (File file:listOfFiles) {
+                    sortFileNodes(file, metaObject);
+                }
+            }
+
+        }
+
+    }
+
+    private static void sortMainConfig() throws TransformerException  {
+
+        File file = new File(sourceDirectory + File.separatorChar + "Configuration.xml");
+        Document document = getDomDocument(file);
         Node parentNode = document.getElementsByTagName("ChildObjects").item(0);
         if (!parentNode.hasChildNodes())
             return;
@@ -248,7 +308,6 @@ public class MetadataSorting {
         String nodeName = "";
         Map<String, Node> sortedNodes = new TreeMap<>();
 
-        // TODO skip subsystems
         Node parentNodeEmpty = document.importNode(parentNode, false);
 
         NodeList unsortedObjects = parentNode.getChildNodes();
@@ -272,40 +331,12 @@ public class MetadataSorting {
 
         parentNode.getParentNode().replaceChild(parentNodeEmpty, parentNode);
 
-        saveToFile(document);
+        saveToFile(document, file);
 
     }
 
-    private static NodeList getMetaObjectsDescription() {
+    public static void main(String[] args) throws XPathExpressionException, TransformerException {
 
-        Node metaDataDescription = null;
-
-        Path path = Paths.get(sourceDirectory + File.separatorChar + "metadataDescription.xml");
-        if (Files.notExists(path)) {
-            userMessage("Parent objects have been sorted. \n" +
-                    "To sort the attributes of objects, you need to place the metadataDescription.xml file in the folder with the configuration files.");
-            return null;
-        }
-
-        try {
-            metaDataDescription = domDocument(path.toFile()).getElementsByTagName("MetaDataDescription").item(0);
-        } catch (IllegalArgumentException e) {
-            userMessage("Invalid format of metadataDescription");
-            System.exit(1);
-        }
-
-        // TODO hasChild has null?
-        if (!metaDataDescription.hasChildNodes()) {
-            return null;
-        }
-
-        return metaDataDescription.getChildNodes();
-
-    }
-
-    public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException, XPathExpressionException, TransformerException {
-
-        // add exit code
         parseArgs(args);
         if (sourceDirectory.isEmpty()) {
             printHelp();
@@ -318,42 +349,9 @@ public class MetadataSorting {
 
         PerformanceMeasurement.setStartTime();
 
-        sortMainConfig(new File(sourceDirectory + File.separatorChar + "Configuration.xml"));
+        sortMainConfig();
 
-        NodeList metaObjects = getMetaObjectsDescription();
-        // TODO make normal functions
-        if (metaObjects == null) {
-            PerformanceMeasurement.printSpentTime();
-            return;
-        }
-
-        for (int i = 0; i < metaObjects.getLength(); i++) {
-
-            Node metaObject = metaObjects.item(i);
-            if (metaObject.getNodeType() != Node.ELEMENT_NODE)
-                continue;
-
-            if (!metaObject.hasAttributes()) {
-                userMessage("Invalid format of metadataDescription");
-                PerformanceMeasurement.printSpentTime();
-                return;
-            }
-
-            NamedNodeMap attributes = metaObject.getAttributes();
-
-            String folder = getAttributeValue(attributes, "folder");
-            path = Paths.get(sourceDirectory + File.separatorChar + folder);
-            if (Files.exists(path)) {
-
-                userMessage(String.format("Processing of %s", folder));
-
-                File[] listOfFiles = path.toFile().listFiles((dir, name) -> name.endsWith(".xml"));
-                for (File file:listOfFiles) {
-                    sortFileNodes(file, metaObject);
-                }
-            }
-
-        }
+        sortDetails();
 
         PerformanceMeasurement.printSpentTime();
 

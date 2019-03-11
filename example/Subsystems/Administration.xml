@@ -20,6 +20,7 @@
 			<Picture/>
 			<Content>
 				<xr:Item xsi:type="xr:MDObjectRef">ExchangePlan.Full</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">DocumentJournal.MainJournal</xr:Item>
 			</Content>
 		</Properties>
 		<ChildObjects/>

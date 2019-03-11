@@ -156,6 +156,7 @@
 			<Document>ExpireDate</Document>
 			<Document>AdditionalResourses</Document>
 			<Document>VendorInvoice</Document>
+			<DocumentJournal>MainJournal</DocumentJournal>
 			<Enum>ProductKinds</Enum>
 			<Enum>OperationKinds</Enum>
 			<Report>Purchases</Report>

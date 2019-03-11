@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:cmi="http://v8.1c.ru/8.2/managed-application/cmi" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xen="http://v8.1c.ru/8.3/xcf/enums" xmlns:xpr="http://v8.1c.ru/8.3/xcf/predef" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.8">
+	<DocumentJournal uuid="57cab1b3-35c6-48ec-abd6-a0af1109742e">
+		<InternalInfo>
+			<xr:GeneratedType name="DocumentJournalSelection.MainJournal" category="Selection">
+				<xr:TypeId>39100237-d1ad-4d59-8ca9-769e14b062e8</xr:TypeId>
+				<xr:ValueId>914c1a0a-6cde-46f4-a353-60c2d0b97edc</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentJournalList.MainJournal" category="List">
+				<xr:TypeId>d5534693-76f2-43bf-9521-84471b2b344a</xr:TypeId>
+				<xr:ValueId>7f3bf766-06c9-403e-b7b9-dfdea02bdfe9</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DocumentJournalManager.MainJournal" category="Manager">
+				<xr:TypeId>c17637c0-40e5-4cdb-84d3-0655184caa00</xr:TypeId>
+				<xr:ValueId>839351a1-1257-498c-995a-a49ccd30968b</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>MainJournal</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Основной журнал</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Main journal</v8:content>
+				</v8:item>
+			</Synonym>
+			<Comment/>
+			<DefaultForm/>
+			<AuxiliaryForm/>
+			<UseStandardCommands>true</UseStandardCommands>
+			<RegisteredDocuments>
+				<xr:Item xsi:type="xr:MDObjectRef">Document.ExpireDate</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">Document.AdditionalResourses</xr:Item>
+				<xr:Item xsi:type="xr:MDObjectRef">Document.VendorInvoice</xr:Item>
+			</RegisteredDocuments>
+			<IncludeHelpInContents>false</IncludeHelpInContents>
+			<ListPresentation/>
+			<ExtendedListPresentation/>
+			<Explanation/>
+		</Properties>
+		<ChildObjects>
+			<Column uuid="0f115dc4-b49e-4a75-ba5c-c4ab1e451de1">
+				<Properties>
+					<Name>Comment</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Comment</v8:content>
+						</v8:item>
+					</Synonym>
+					<Comment/>
+					<Indexing>DontIndex</Indexing>
+					<References>
+						<xr:Item xsi:type="xr:MDObjectRef">Document.ExpireDate.Attribute.Comment</xr:Item>
+						<xr:Item xsi:type="xr:MDObjectRef">Document.AdditionalResourses.Attribute.Comment</xr:Item>
+						<xr:Item xsi:type="xr:MDObjectRef">Document.VendorInvoice.Attribute.Comment</xr:Item>
+					</References>
+				</Properties>
+			</Column>
+		</ChildObjects>
+	</DocumentJournal>
+</MetaDataObject>
