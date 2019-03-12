@@ -6,3 +6,4 @@
 *.jar
 .DS_Store
 *.zip
+/out
