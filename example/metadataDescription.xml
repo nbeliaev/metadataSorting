@@ -1,5 +1,5 @@
-<!-- This file need to place in the same directory with configuration files. -->
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- This file need to place in the same directory with configuration files. -->
 <MetaDataDescription>
 	<ExchangePlan folder="ExchangePlans" pathPrefix="//ExchangePlan/ChildObjects/" pathName="Properties/Name">
 		<Attribute/>

@@ -4,16 +4,15 @@ import java.util.concurrent.TimeUnit;
 
 public class PerformanceMeasurement {
 
-    private static long startTime;
+    private long startTime;
 
-    public static void setStartTime() {
+    PerformanceMeasurement() {
         startTime = System.currentTimeMillis();
     }
 
-    public static void printSpentTime() {
+    public void printSpentTime() {
         long estimatedTime  = System.currentTimeMillis() - startTime;
-        System.out.println("Spent processing time: " + String.format(
-                "%d min, %d sec, %d msec",
+        System.out.println("Spent processing time: " + String.format("%d min, %d sec, %d msec",
                 TimeUnit.MILLISECONDS.toMinutes(estimatedTime),
                 TimeUnit.MILLISECONDS.toSeconds(estimatedTime),
                 TimeUnit.MILLISECONDS.toMillis(estimatedTime)));

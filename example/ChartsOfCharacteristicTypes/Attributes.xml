@@ -1,28 +1,28 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:cmi="http://v8.1c.ru/8.2/managed-application/cmi" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xen="http://v8.1c.ru/8.3/xcf/enums" xmlns:xpr="http://v8.1c.ru/8.3/xcf/predef" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.8">
 	<ChartOfCharacteristicTypes uuid="e343ef6c-42e6-45de-98a0-45ea9bb49e0c">
 		<InternalInfo>
-			<xr:GeneratedType name="ChartOfCharacteristicTypesObject.Attributes" category="Object">
+			<xr:GeneratedType category="Object" name="ChartOfCharacteristicTypesObject.Attributes">
 				<xr:TypeId>0beef6a8-7db8-456f-a5a4-a5b487c2e6c6</xr:TypeId>
 				<xr:ValueId>f1588f77-4a66-4886-a844-078827511523</xr:ValueId>
 			</xr:GeneratedType>
-			<xr:GeneratedType name="ChartOfCharacteristicTypesRef.Attributes" category="Ref">
+			<xr:GeneratedType category="Ref" name="ChartOfCharacteristicTypesRef.Attributes">
 				<xr:TypeId>9b882823-072a-4a19-97bf-35ed0e65dd06</xr:TypeId>
 				<xr:ValueId>7f090e6f-23fe-47a3-af79-799f4b438cd4</xr:ValueId>
 			</xr:GeneratedType>
-			<xr:GeneratedType name="ChartOfCharacteristicTypesSelection.Attributes" category="Selection">
+			<xr:GeneratedType category="Selection" name="ChartOfCharacteristicTypesSelection.Attributes">
 				<xr:TypeId>24ce6337-3a8e-4757-b640-40090b38b8a1</xr:TypeId>
 				<xr:ValueId>f6a7d28c-9966-41cd-bb52-782b4a6c9668</xr:ValueId>
 			</xr:GeneratedType>
-			<xr:GeneratedType name="ChartOfCharacteristicTypesList.Attributes" category="List">
+			<xr:GeneratedType category="List" name="ChartOfCharacteristicTypesList.Attributes">
 				<xr:TypeId>2297984f-3a24-449e-ae5b-b5c150f736e9</xr:TypeId>
 				<xr:ValueId>e16d6f04-33ed-4e7b-b164-f0768b108e43</xr:ValueId>
 			</xr:GeneratedType>
-			<xr:GeneratedType name="Characteristic.Attributes" category="Characteristic">
+			<xr:GeneratedType category="Characteristic" name="Characteristic.Attributes">
 				<xr:TypeId>707914e8-e4b2-4e3b-b853-0a1d2dff14f2</xr:TypeId>
 				<xr:ValueId>57c05013-7024-47d0-a571-254dd4fb879a</xr:ValueId>
 			</xr:GeneratedType>
-			<xr:GeneratedType name="ChartOfCharacteristicTypesManager.Attributes" category="Manager">
+			<xr:GeneratedType category="Manager" name="ChartOfCharacteristicTypesManager.Attributes">
 				<xr:TypeId>eb47f80f-d94d-4837-9f90-a05385cb8a1c</xr:TypeId>
 				<xr:ValueId>eeded112-6be0-421e-8b17-db8cef92f8cc</xr:ValueId>
 			</xr:GeneratedType>
@@ -95,7 +95,7 @@
 			<DataHistory>DontUse</DataHistory>
 		</Properties>
 		<ChildObjects>
-			<Attribute uuid="1c89ad31-cb53-4831-ac45-51ea6880ac5b">
+<Attribute uuid="1c89ad31-cb53-4831-ac45-51ea6880ac5b">
 				<Properties>
 					<Name>Key</Name>
 					<Synonym>
@@ -143,7 +143,7 @@
 					<DataHistory>Use</DataHistory>
 				</Properties>
 			</Attribute>
-			<Attribute uuid="d6f440ca-9ebe-4072-a1b5-125d85f8a00c">
+<Attribute uuid="d6f440ca-9ebe-4072-a1b5-125d85f8a00c">
 				<Properties>
 					<Name>Value</Name>
 					<Synonym>
@@ -191,13 +191,13 @@
 					<DataHistory>Use</DataHistory>
 				</Properties>
 			</Attribute>
-			<TabularSection uuid="22f64f8f-75f0-4f5f-b1dd-4ed2de2d359f">
+<TabularSection uuid="22f64f8f-75f0-4f5f-b1dd-4ed2de2d359f">
 				<InternalInfo>
-					<xr:GeneratedType name="ChartOfCharacteristicTypesTabularSection.Attributes.Objects" category="TabularSection">
+					<xr:GeneratedType category="TabularSection" name="ChartOfCharacteristicTypesTabularSection.Attributes.Objects">
 						<xr:TypeId>47d975c8-eb15-423f-856a-6bfa9e7251d2</xr:TypeId>
 						<xr:ValueId>e2baf9dc-6c5a-437a-977b-aa2a0519e738</xr:ValueId>
 					</xr:GeneratedType>
-					<xr:GeneratedType name="ChartOfCharacteristicTypesTabularSectionRow.Attributes.Objects" category="TabularSectionRow">
+					<xr:GeneratedType category="TabularSectionRow" name="ChartOfCharacteristicTypesTabularSectionRow.Attributes.Objects">
 						<xr:TypeId>ccd4aaf9-f90b-4481-afcf-8f553d9b93ea</xr:TypeId>
 						<xr:ValueId>b6843687-1c29-48f1-b237-dc13d2026a26</xr:ValueId>
 					</xr:GeneratedType>
@@ -220,7 +220,7 @@
 					<Use>ForItem</Use>
 				</Properties>
 				<ChildObjects>
-					<Attribute uuid="bab42f5f-8d9a-4a40-8064-6e86f0db05ba">
+<Attribute uuid="bab42f5f-8d9a-4a40-8064-6e86f0db05ba">
 						<Properties>
 							<Name>Item</Name>
 							<Synonym>
@@ -265,7 +265,7 @@
 							<DataHistory>Use</DataHistory>
 						</Properties>
 					</Attribute>
-					<Attribute uuid="c8b0d66c-493e-4db2-924b-59355661fd3a">
+<Attribute uuid="c8b0d66c-493e-4db2-924b-59355661fd3a">
 						<Properties>
 							<Name>Quantity</Name>
 							<Synonym>
@@ -310,8 +310,8 @@
 							<DataHistory>Use</DataHistory>
 						</Properties>
 					</Attribute>
-				</ChildObjects>
+</ChildObjects>
 			</TabularSection>
-		</ChildObjects>
+</ChildObjects>
 	</ChartOfCharacteristicTypes>
 </MetaDataObject>

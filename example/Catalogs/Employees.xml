@@ -1,24 +1,24 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:cmi="http://v8.1c.ru/8.2/managed-application/cmi" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xen="http://v8.1c.ru/8.3/xcf/enums" xmlns:xpr="http://v8.1c.ru/8.3/xcf/predef" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.8">
 	<Catalog uuid="0a43ecfa-f30d-4da3-8048-b8602e9a7815">
 		<InternalInfo>
-			<xr:GeneratedType name="CatalogObject.Employees" category="Object">
+			<xr:GeneratedType category="Object" name="CatalogObject.Employees">
 				<xr:TypeId>75b70e43-f145-401f-b83c-a19e4d854dc8</xr:TypeId>
 				<xr:ValueId>d630add6-3fbb-4fff-9c51-4ad8ab069fb1</xr:ValueId>
 			</xr:GeneratedType>
-			<xr:GeneratedType name="CatalogRef.Employees" category="Ref">
+			<xr:GeneratedType category="Ref" name="CatalogRef.Employees">
 				<xr:TypeId>4cf2dfb2-d741-4b05-bc5f-da53a54d7010</xr:TypeId>
 				<xr:ValueId>1b9ee5d5-248a-47f6-84ce-99df2ea5ac74</xr:ValueId>
 			</xr:GeneratedType>
-			<xr:GeneratedType name="CatalogSelection.Employees" category="Selection">
+			<xr:GeneratedType category="Selection" name="CatalogSelection.Employees">
 				<xr:TypeId>af9dc0bb-c7b0-4c47-9576-c4224f769de7</xr:TypeId>
 				<xr:ValueId>ac081868-f490-4216-a9bd-60a399f9cf24</xr:ValueId>
 			</xr:GeneratedType>
-			<xr:GeneratedType name="CatalogList.Employees" category="List">
+			<xr:GeneratedType category="List" name="CatalogList.Employees">
 				<xr:TypeId>ac285ae6-74b8-4af5-b89f-957156b012e0</xr:TypeId>
 				<xr:ValueId>018b731c-da3f-462c-83b6-76a98acc68eb</xr:ValueId>
 			</xr:GeneratedType>
-			<xr:GeneratedType name="CatalogManager.Employees" category="Manager">
+			<xr:GeneratedType category="Manager" name="CatalogManager.Employees">
 				<xr:TypeId>c01d1c30-3c32-4711-96dc-b832ae58e079</xr:TypeId>
 				<xr:ValueId>a0f3c294-dfa1-441f-8b22-55edc5f4e97e</xr:ValueId>
 			</xr:GeneratedType>
@@ -89,7 +89,7 @@
 			<DataHistory>DontUse</DataHistory>
 		</Properties>
 		<ChildObjects>
-			<Attribute uuid="0d7deb3b-baf6-4bf2-a111-4a9de500fee4">
+<Attribute uuid="0d7deb3b-baf6-4bf2-a111-4a9de500fee4">
 				<Properties>
 					<Name>Age</Name>
 					<Synonym>
@@ -137,7 +137,7 @@
 					<DataHistory>Use</DataHistory>
 				</Properties>
 			</Attribute>
-			<Attribute uuid="61b55c9a-3e8f-418a-b370-7b91c27f03e9">
+<Attribute uuid="61b55c9a-3e8f-418a-b370-7b91c27f03e9">
 				<Properties>
 					<Name>Gender</Name>
 					<Synonym>
@@ -185,7 +185,7 @@
 					<DataHistory>Use</DataHistory>
 				</Properties>
 			</Attribute>
-			<Attribute uuid="943a5be5-8f09-4208-ac1e-ba5dd79aa3c0">
+<Attribute uuid="943a5be5-8f09-4208-ac1e-ba5dd79aa3c0">
 				<Properties>
 					<Name>Married</Name>
 					<Synonym>
@@ -229,6 +229,6 @@
 					<DataHistory>Use</DataHistory>
 				</Properties>
 			</Attribute>
-		</ChildObjects>
+</ChildObjects>
 	</Catalog>
 </MetaDataObject>

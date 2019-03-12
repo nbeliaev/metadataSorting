@@ -1,12 +1,12 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:cmi="http://v8.1c.ru/8.2/managed-application/cmi" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xen="http://v8.1c.ru/8.3/xcf/enums" xmlns:xpr="http://v8.1c.ru/8.3/xcf/predef" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.8">
 	<DataProcessor uuid="746da68d-f711-458f-b870-d0db59e9e572">
 		<InternalInfo>
-			<xr:GeneratedType name="DataProcessorObject.InitialSettings" category="Object">
+			<xr:GeneratedType category="Object" name="DataProcessorObject.InitialSettings">
 				<xr:TypeId>c1ef3f53-aed9-4eaa-aac5-70cc6fb15003</xr:TypeId>
 				<xr:ValueId>8c5c1333-f2ef-450e-9450-6532b4532193</xr:ValueId>
 			</xr:GeneratedType>
-			<xr:GeneratedType name="DataProcessorManager.InitialSettings" category="Manager">
+			<xr:GeneratedType category="Manager" name="DataProcessorManager.InitialSettings">
 				<xr:TypeId>e5864305-5ee7-4df4-ac27-c363328fb686</xr:TypeId>
 				<xr:ValueId>81a08231-28b9-4238-a9d9-c73d74f501b2</xr:ValueId>
 			</xr:GeneratedType>
@@ -32,7 +32,7 @@
 			<Explanation/>
 		</Properties>
 		<ChildObjects>
-			<Attribute uuid="924ea059-0a9f-4152-963a-fc69f0a67030">
+<Attribute uuid="924ea059-0a9f-4152-963a-fc69f0a67030">
 				<Properties>
 					<Name>Date</Name>
 					<Synonym>
@@ -74,7 +74,7 @@
 					<ChoiceHistoryOnInput>Auto</ChoiceHistoryOnInput>
 				</Properties>
 			</Attribute>
-			<Attribute uuid="3011c93e-60dd-48b9-8427-169bcaac9cee">
+<Attribute uuid="3011c93e-60dd-48b9-8427-169bcaac9cee">
 				<Properties>
 					<Name>Responsible</Name>
 					<Synonym>
@@ -112,13 +112,13 @@
 					<ChoiceHistoryOnInput>Auto</ChoiceHistoryOnInput>
 				</Properties>
 			</Attribute>
-			<TabularSection uuid="d59e19e9-a32f-4fe1-a7f1-a024a84bf826">
+<TabularSection uuid="d59e19e9-a32f-4fe1-a7f1-a024a84bf826">
 				<InternalInfo>
-					<xr:GeneratedType name="DataProcessorTabularSection.InitialSettings.Items" category="TabularSection">
+					<xr:GeneratedType category="TabularSection" name="DataProcessorTabularSection.InitialSettings.Items">
 						<xr:TypeId>f4a2f1bd-0823-49ce-b59b-b9fe916623da</xr:TypeId>
 						<xr:ValueId>2b0ecb65-cafd-4c15-b409-5632427ec063</xr:ValueId>
 					</xr:GeneratedType>
-					<xr:GeneratedType name="DataProcessorTabularSectionRow.InitialSettings.Items" category="TabularSectionRow">
+					<xr:GeneratedType category="TabularSectionRow" name="DataProcessorTabularSectionRow.InitialSettings.Items">
 						<xr:TypeId>abb6ea90-c269-4296-82bf-960429ed1bd5</xr:TypeId>
 						<xr:ValueId>c9dd25f1-b2cc-4302-adbf-70c87a035979</xr:ValueId>
 					</xr:GeneratedType>
@@ -140,7 +140,7 @@
 					<FillChecking>DontCheck</FillChecking>
 				</Properties>
 				<ChildObjects>
-					<Attribute uuid="603324c1-e051-4a6d-be5c-d5b74e6d797b">
+<Attribute uuid="603324c1-e051-4a6d-be5c-d5b74e6d797b">
 						<Properties>
 							<Name>Item</Name>
 							<Synonym>
@@ -184,7 +184,7 @@
 							<ChoiceHistoryOnInput>Auto</ChoiceHistoryOnInput>
 						</Properties>
 					</Attribute>
-					<Attribute uuid="2a78bf26-e385-4908-bdd3-163068bd70f9">
+<Attribute uuid="2a78bf26-e385-4908-bdd3-163068bd70f9">
 						<Properties>
 							<Name>Quantity</Name>
 							<Synonym>
@@ -228,11 +228,11 @@
 							<ChoiceHistoryOnInput>Auto</ChoiceHistoryOnInput>
 						</Properties>
 					</Attribute>
-				</ChildObjects>
+</ChildObjects>
 			</TabularSection>
-			<Form>Form</Form>
-			<Form>FGS</Form>
-			<Form>Abc</Form>
-		</ChildObjects>
+<Form>Abc</Form>
+<Form>FGS</Form>
+<Form>Form</Form>
+</ChildObjects>
 	</DataProcessor>
 </MetaDataObject>

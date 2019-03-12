@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:cmi="http://v8.1c.ru/8.2/managed-application/cmi" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xen="http://v8.1c.ru/8.3/xcf/enums" xmlns:xpr="http://v8.1c.ru/8.3/xcf/predef" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.8">
 	<Configuration uuid="0f1d8a27-c5e5-432e-b564-8f1a037af2b1">
 		<InternalInfo>
@@ -132,42 +132,42 @@
 			<DefaultConstantsForm/>
 		</Properties>
 		<ChildObjects>
-			<Language>Russian</Language>
-			<Language>English</Language>
-			<Subsystem>Purchases</Subsystem>
-			<Subsystem>Employees</Subsystem>
-			<Subsystem>Administration</Subsystem>
-			<SessionParameter>CurrentUser</SessionParameter>
-			<SessionParameter>CurrentExchangeNode</SessionParameter>
-			<Role>FullRights</Role>
-			<Role>ViewOnly</Role>
-			<CommonModule>Purchases</CommonModule>
-			<CommonModule>CommonUse</CommonModule>
-			<CommonAttribute>Comment</CommonAttribute>
-			<CommonAttribute>DataSeparator</CommonAttribute>
-			<ExchangePlan>Full</ExchangePlan>
-			<EventSubscription>PurchasesOnCopy</EventSubscription>
-			<EventSubscription>PurchasesOnWrite</EventSubscription>
-			<ScheduledJob>ReportsSending</ScheduledJob>
-			<ScheduledJob>ExportData</ScheduledJob>
-			<Catalog>Vendors</Catalog>
-			<Catalog>Products</Catalog>
-			<Catalog>Employees</Catalog>
-			<Document>ExpireDate</Document>
-			<Document>AdditionalResourses</Document>
-			<Document>VendorInvoice</Document>
-			<DocumentJournal>MainJournal</DocumentJournal>
-			<Enum>ProductKinds</Enum>
-			<Enum>OperationKinds</Enum>
-			<Report>Purchases</Report>
-			<Report>Payments</Report>
-			<DataProcessor>InitialSettings</DataProcessor>
-			<ChartOfCharacteristicTypes>Attributes</ChartOfCharacteristicTypes>
-			<ChartOfCharacteristicTypes>EnterDates</ChartOfCharacteristicTypes>
-			<BusinessProcess>BusinessProcess2</BusinessProcess>
-			<BusinessProcess>BusinessProcess1</BusinessProcess>
-			<Task>Task5</Task>
-			<Task>Task1</Task>
-		</ChildObjects>
+<Language>English</Language>
+<Language>Russian</Language>
+<Subsystem>Administration</Subsystem>
+<Subsystem>Employees</Subsystem>
+<Subsystem>Purchases</Subsystem>
+<SessionParameter>CurrentExchangeNode</SessionParameter>
+<SessionParameter>CurrentUser</SessionParameter>
+<Role>FullRights</Role>
+<Role>ViewOnly</Role>
+<CommonModule>CommonUse</CommonModule>
+<CommonModule>Purchases</CommonModule>
+<CommonAttribute>Comment</CommonAttribute>
+<CommonAttribute>DataSeparator</CommonAttribute>
+<ExchangePlan>Full</ExchangePlan>
+<EventSubscription>PurchasesOnCopy</EventSubscription>
+<EventSubscription>PurchasesOnWrite</EventSubscription>
+<ScheduledJob>ExportData</ScheduledJob>
+<ScheduledJob>ReportsSending</ScheduledJob>
+<Catalog>Employees</Catalog>
+<Catalog>Products</Catalog>
+<Catalog>Vendors</Catalog>
+<Document>AdditionalResourses</Document>
+<Document>ExpireDate</Document>
+<Document>VendorInvoice</Document>
+<DocumentJournal>MainJournal</DocumentJournal>
+<Enum>OperationKinds</Enum>
+<Enum>ProductKinds</Enum>
+<Report>Payments</Report>
+<Report>Purchases</Report>
+<DataProcessor>InitialSettings</DataProcessor>
+<ChartOfCharacteristicTypes>Attributes</ChartOfCharacteristicTypes>
+<ChartOfCharacteristicTypes>EnterDates</ChartOfCharacteristicTypes>
+<BusinessProcess>BusinessProcess1</BusinessProcess>
+<BusinessProcess>BusinessProcess2</BusinessProcess>
+<Task>Task1</Task>
+<Task>Task5</Task>
+</ChildObjects>
 	</Configuration>
 </MetaDataObject>

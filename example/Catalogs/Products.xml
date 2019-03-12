@@ -1,24 +1,24 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:cmi="http://v8.1c.ru/8.2/managed-application/cmi" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xen="http://v8.1c.ru/8.3/xcf/enums" xmlns:xpr="http://v8.1c.ru/8.3/xcf/predef" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.8">
 	<Catalog uuid="ebd9be4a-1f9e-4508-8eda-8df45b731fb6">
 		<InternalInfo>
-			<xr:GeneratedType name="CatalogObject.Products" category="Object">
+			<xr:GeneratedType category="Object" name="CatalogObject.Products">
 				<xr:TypeId>e98d247b-d374-4eda-88f6-3730f739ba17</xr:TypeId>
 				<xr:ValueId>b3abf5b3-4f92-49eb-9f76-de03102db652</xr:ValueId>
 			</xr:GeneratedType>
-			<xr:GeneratedType name="CatalogRef.Products" category="Ref">
+			<xr:GeneratedType category="Ref" name="CatalogRef.Products">
 				<xr:TypeId>651a39b9-482a-4381-b31a-e9489e082a58</xr:TypeId>
 				<xr:ValueId>d92fae84-3272-46a8-ad4d-2dc824c800b5</xr:ValueId>
 			</xr:GeneratedType>
-			<xr:GeneratedType name="CatalogSelection.Products" category="Selection">
+			<xr:GeneratedType category="Selection" name="CatalogSelection.Products">
 				<xr:TypeId>41765df1-36ef-42b9-8545-bf95235c7d98</xr:TypeId>
 				<xr:ValueId>d253d574-2843-4264-8f75-08914c4f7e00</xr:ValueId>
 			</xr:GeneratedType>
-			<xr:GeneratedType name="CatalogList.Products" category="List">
+			<xr:GeneratedType category="List" name="CatalogList.Products">
 				<xr:TypeId>363c098a-c74e-46bd-8b5c-757ea43961b3</xr:TypeId>
 				<xr:ValueId>a06469ea-a9d6-42f8-a4a8-92ad4477e0ed</xr:ValueId>
 			</xr:GeneratedType>
-			<xr:GeneratedType name="CatalogManager.Products" category="Manager">
+			<xr:GeneratedType category="Manager" name="CatalogManager.Products">
 				<xr:TypeId>2df88784-a66a-4583-8cdd-160dd6dec32b</xr:TypeId>
 				<xr:ValueId>236eaa43-5355-4110-9968-c2da0dedc23e</xr:ValueId>
 			</xr:GeneratedType>
@@ -89,7 +89,7 @@
 			<DataHistory>DontUse</DataHistory>
 		</Properties>
 		<ChildObjects>
-			<Attribute uuid="3216e112-8e3d-4523-8d24-7e123b7d99e7">
+<Attribute uuid="3216e112-8e3d-4523-8d24-7e123b7d99e7">
 				<Properties>
 					<Name>Price</Name>
 					<Synonym>
@@ -138,7 +138,51 @@
 					<DataHistory>Use</DataHistory>
 				</Properties>
 			</Attribute>
-			<Attribute uuid="76c480ee-14dc-4ffc-8672-8f29a1050fde">
+<Attribute uuid="4eccebe4-2528-43e4-abe6-25c805b71b6c">
+				<Properties>
+					<Name>ProductKind</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Тип товара</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Product kind</v8:content>
+						</v8:item>
+					</Synonym>
+					<Comment/>
+					<Type>
+						<v8:Type>cfg:EnumRef.ProductKinds</v8:Type>
+					</Type>
+					<PasswordMode>false</PasswordMode>
+					<Format/>
+					<EditFormat/>
+					<ToolTip/>
+					<MarkNegatives>false</MarkNegatives>
+					<Mask/>
+					<MultiLine>false</MultiLine>
+					<ExtendedEdit>false</ExtendedEdit>
+					<MinValue xsi:nil="true"/>
+					<MaxValue xsi:nil="true"/>
+					<FillFromFillingValue>false</FillFromFillingValue>
+					<FillValue xsi:nil="true"/>
+					<FillChecking>DontCheck</FillChecking>
+					<ChoiceFoldersAndItems>Items</ChoiceFoldersAndItems>
+					<ChoiceParameterLinks/>
+					<ChoiceParameters/>
+					<QuickChoice>Auto</QuickChoice>
+					<CreateOnInput>Auto</CreateOnInput>
+					<ChoiceForm/>
+					<LinkByType/>
+					<ChoiceHistoryOnInput>Auto</ChoiceHistoryOnInput>
+					<Use>ForItem</Use>
+					<Indexing>DontIndex</Indexing>
+					<FullTextSearch>Use</FullTextSearch>
+					<DataHistory>Use</DataHistory>
+				</Properties>
+			</Attribute>
+<Attribute uuid="76c480ee-14dc-4ffc-8672-8f29a1050fde">
 				<Properties>
 					<Name>SKU</Name>
 					<Synonym>
@@ -186,173 +230,13 @@
 					<DataHistory>Use</DataHistory>
 				</Properties>
 			</Attribute>
-			<Attribute uuid="4eccebe4-2528-43e4-abe6-25c805b71b6c">
-				<Properties>
-					<Name>ProductKind</Name>
-					<Synonym>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Тип товара</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Product kind</v8:content>
-						</v8:item>
-					</Synonym>
-					<Comment/>
-					<Type>
-						<v8:Type>cfg:EnumRef.ProductKinds</v8:Type>
-					</Type>
-					<PasswordMode>false</PasswordMode>
-					<Format/>
-					<EditFormat/>
-					<ToolTip/>
-					<MarkNegatives>false</MarkNegatives>
-					<Mask/>
-					<MultiLine>false</MultiLine>
-					<ExtendedEdit>false</ExtendedEdit>
-					<MinValue xsi:nil="true"/>
-					<MaxValue xsi:nil="true"/>
-					<FillFromFillingValue>false</FillFromFillingValue>
-					<FillValue xsi:nil="true"/>
-					<FillChecking>DontCheck</FillChecking>
-					<ChoiceFoldersAndItems>Items</ChoiceFoldersAndItems>
-					<ChoiceParameterLinks/>
-					<ChoiceParameters/>
-					<QuickChoice>Auto</QuickChoice>
-					<CreateOnInput>Auto</CreateOnInput>
-					<ChoiceForm/>
-					<LinkByType/>
-					<ChoiceHistoryOnInput>Auto</ChoiceHistoryOnInput>
-					<Use>ForItem</Use>
-					<Indexing>DontIndex</Indexing>
-					<FullTextSearch>Use</FullTextSearch>
-					<DataHistory>Use</DataHistory>
-				</Properties>
-			</Attribute>
-			<TabularSection uuid="11c5fa68-3c12-4ab3-892c-740e3f5ea7da">
+<TabularSection uuid="c87de365-a649-4af0-a06f-82404fb6423e">
 				<InternalInfo>
-					<xr:GeneratedType name="CatalogTabularSection.Products.Vendors" category="TabularSection">
-						<xr:TypeId>97a6223f-898e-4f07-a227-616e4faaa002</xr:TypeId>
-						<xr:ValueId>2cfb758c-44a8-4b04-a903-652230b12f5d</xr:ValueId>
-					</xr:GeneratedType>
-					<xr:GeneratedType name="CatalogTabularSectionRow.Products.Vendors" category="TabularSectionRow">
-						<xr:TypeId>6a9cb7c8-c800-4356-8fc8-911a86ae68aa</xr:TypeId>
-						<xr:ValueId>f7d5ef58-09a4-4a85-8987-f60345bd7e76</xr:ValueId>
-					</xr:GeneratedType>
-				</InternalInfo>
-				<Properties>
-					<Name>Vendors</Name>
-					<Synonym>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Поставщики</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Vendors</v8:content>
-						</v8:item>
-					</Synonym>
-					<Comment/>
-					<ToolTip/>
-					<FillChecking>DontCheck</FillChecking>
-					<Use>ForItem</Use>
-				</Properties>
-				<ChildObjects>
-					<Attribute uuid="024c3e5b-d8c9-46bd-b19e-c380d168de10">
-						<Properties>
-							<Name>Vendor</Name>
-							<Synonym>
-								<v8:item>
-									<v8:lang>ru</v8:lang>
-									<v8:content>Поставщик</v8:content>
-								</v8:item>
-								<v8:item>
-									<v8:lang>en</v8:lang>
-									<v8:content>Vendor</v8:content>
-								</v8:item>
-							</Synonym>
-							<Comment/>
-							<Type>
-								<v8:Type>cfg:CatalogRef.Vendors</v8:Type>
-							</Type>
-							<PasswordMode>false</PasswordMode>
-							<Format/>
-							<EditFormat/>
-							<ToolTip/>
-							<MarkNegatives>false</MarkNegatives>
-							<Mask/>
-							<MultiLine>false</MultiLine>
-							<ExtendedEdit>false</ExtendedEdit>
-							<MinValue xsi:nil="true"/>
-							<MaxValue xsi:nil="true"/>
-							<FillChecking>DontCheck</FillChecking>
-							<ChoiceFoldersAndItems>Items</ChoiceFoldersAndItems>
-							<ChoiceParameterLinks/>
-							<ChoiceParameters/>
-							<QuickChoice>Auto</QuickChoice>
-							<CreateOnInput>Auto</CreateOnInput>
-							<ChoiceForm/>
-							<LinkByType/>
-							<ChoiceHistoryOnInput>Auto</ChoiceHistoryOnInput>
-							<Indexing>DontIndex</Indexing>
-							<FullTextSearch>Use</FullTextSearch>
-							<DataHistory>Use</DataHistory>
-						</Properties>
-					</Attribute>
-					<Attribute uuid="a2fb6cdd-202d-4fea-95ec-173b7fe27482">
-						<Properties>
-							<Name>ShipmentDate</Name>
-							<Synonym>
-								<v8:item>
-									<v8:lang>ru</v8:lang>
-									<v8:content>Дата отгрузки</v8:content>
-								</v8:item>
-								<v8:item>
-									<v8:lang>en</v8:lang>
-									<v8:content>Shipment date</v8:content>
-								</v8:item>
-							</Synonym>
-							<Comment/>
-							<Type>
-								<v8:Type>xs:dateTime</v8:Type>
-								<v8:DateQualifiers>
-									<v8:DateFractions>Date</v8:DateFractions>
-								</v8:DateQualifiers>
-							</Type>
-							<PasswordMode>false</PasswordMode>
-							<Format/>
-							<EditFormat/>
-							<ToolTip/>
-							<MarkNegatives>false</MarkNegatives>
-							<Mask/>
-							<MultiLine>false</MultiLine>
-							<ExtendedEdit>false</ExtendedEdit>
-							<MinValue xsi:nil="true"/>
-							<MaxValue xsi:nil="true"/>
-							<FillChecking>DontCheck</FillChecking>
-							<ChoiceFoldersAndItems>Items</ChoiceFoldersAndItems>
-							<ChoiceParameterLinks/>
-							<ChoiceParameters/>
-							<QuickChoice>Auto</QuickChoice>
-							<CreateOnInput>Auto</CreateOnInput>
-							<ChoiceForm/>
-							<LinkByType/>
-							<ChoiceHistoryOnInput>Auto</ChoiceHistoryOnInput>
-							<Indexing>DontIndex</Indexing>
-							<FullTextSearch>Use</FullTextSearch>
-							<DataHistory>Use</DataHistory>
-						</Properties>
-					</Attribute>
-				</ChildObjects>
-			</TabularSection>
-			<TabularSection uuid="c87de365-a649-4af0-a06f-82404fb6423e">
-				<InternalInfo>
-					<xr:GeneratedType name="CatalogTabularSection.Products.Additional" category="TabularSection">
+					<xr:GeneratedType category="TabularSection" name="CatalogTabularSection.Products.Additional">
 						<xr:TypeId>ba1679eb-6962-4ee1-a14d-24cf91453191</xr:TypeId>
 						<xr:ValueId>08021c42-2773-43d7-9d5c-a1d631af7a77</xr:ValueId>
 					</xr:GeneratedType>
-					<xr:GeneratedType name="CatalogTabularSectionRow.Products.Additional" category="TabularSectionRow">
+					<xr:GeneratedType category="TabularSectionRow" name="CatalogTabularSectionRow.Products.Additional">
 						<xr:TypeId>b6b89be2-10ad-42ac-b82e-dbc88a8abc4f</xr:TypeId>
 						<xr:ValueId>9781f525-9326-4236-96e7-766b02cedab6</xr:ValueId>
 					</xr:GeneratedType>
@@ -375,7 +259,7 @@
 					<Use>ForItem</Use>
 				</Properties>
 				<ChildObjects>
-					<Attribute uuid="c2584cfd-677d-498c-81ba-6e364bb4f2d3">
+<Attribute uuid="c2584cfd-677d-498c-81ba-6e364bb4f2d3">
 						<Properties>
 							<Name>Property</Name>
 							<Synonym>
@@ -420,7 +304,7 @@
 							<DataHistory>Use</DataHistory>
 						</Properties>
 					</Attribute>
-					<Attribute uuid="ad74c61f-6360-4357-9cc1-b1d9589eb1c2">
+<Attribute uuid="ad74c61f-6360-4357-9cc1-b1d9589eb1c2">
 						<Properties>
 							<Name>Used</Name>
 							<Synonym>
@@ -461,7 +345,7 @@
 							<DataHistory>Use</DataHistory>
 						</Properties>
 					</Attribute>
-					<Attribute uuid="1ac9fbd5-5e0f-4667-83f9-c492a641e41c">
+<Attribute uuid="1ac9fbd5-5e0f-4667-83f9-c492a641e41c">
 						<Properties>
 							<Name>Value</Name>
 							<Synonym>
@@ -506,41 +390,131 @@
 							<DataHistory>Use</DataHistory>
 						</Properties>
 					</Attribute>
-				</ChildObjects>
+</ChildObjects>
 			</TabularSection>
-			<Form>ItemForm</Form>
-			<Form>ListForm</Form>
-			<Form>ChoiceForm</Form>
-			<Form>PriceList</Form>
-			<Template>MainList</Template>
-			<Template>PF_MXL_Details</Template>
-			<Command uuid="0911d94a-3650-4f15-b41a-c301962635d6">
+<TabularSection uuid="11c5fa68-3c12-4ab3-892c-740e3f5ea7da">
+				<InternalInfo>
+					<xr:GeneratedType category="TabularSection" name="CatalogTabularSection.Products.Vendors">
+						<xr:TypeId>97a6223f-898e-4f07-a227-616e4faaa002</xr:TypeId>
+						<xr:ValueId>2cfb758c-44a8-4b04-a903-652230b12f5d</xr:ValueId>
+					</xr:GeneratedType>
+					<xr:GeneratedType category="TabularSectionRow" name="CatalogTabularSectionRow.Products.Vendors">
+						<xr:TypeId>6a9cb7c8-c800-4356-8fc8-911a86ae68aa</xr:TypeId>
+						<xr:ValueId>f7d5ef58-09a4-4a85-8987-f60345bd7e76</xr:ValueId>
+					</xr:GeneratedType>
+				</InternalInfo>
 				<Properties>
-					<Name>ProductPurchases</Name>
+					<Name>Vendors</Name>
 					<Synonym>
 						<v8:item>
 							<v8:lang>ru</v8:lang>
-							<v8:content>Покупки</v8:content>
+							<v8:content>Поставщики</v8:content>
 						</v8:item>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Product purchases</v8:content>
+							<v8:content>Vendors</v8:content>
 						</v8:item>
 					</Synonym>
 					<Comment/>
-					<Group>FormNavigationPanelImportant</Group>
-					<CommandParameterType>
-						<v8:Type>cfg:CatalogRef.Products</v8:Type>
-					</CommandParameterType>
-					<ParameterUseMode>Single</ParameterUseMode>
-					<ModifiesData>false</ModifiesData>
-					<Representation>Auto</Representation>
 					<ToolTip/>
-					<Picture/>
-					<Shortcut/>
+					<FillChecking>DontCheck</FillChecking>
+					<Use>ForItem</Use>
 				</Properties>
-			</Command>
-			<Command uuid="f6005fb8-a382-4473-be92-f3f6679c8195">
+				<ChildObjects>
+<Attribute uuid="a2fb6cdd-202d-4fea-95ec-173b7fe27482">
+						<Properties>
+							<Name>ShipmentDate</Name>
+							<Synonym>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>Дата отгрузки</v8:content>
+								</v8:item>
+								<v8:item>
+									<v8:lang>en</v8:lang>
+									<v8:content>Shipment date</v8:content>
+								</v8:item>
+							</Synonym>
+							<Comment/>
+							<Type>
+								<v8:Type>xs:dateTime</v8:Type>
+								<v8:DateQualifiers>
+									<v8:DateFractions>Date</v8:DateFractions>
+								</v8:DateQualifiers>
+							</Type>
+							<PasswordMode>false</PasswordMode>
+							<Format/>
+							<EditFormat/>
+							<ToolTip/>
+							<MarkNegatives>false</MarkNegatives>
+							<Mask/>
+							<MultiLine>false</MultiLine>
+							<ExtendedEdit>false</ExtendedEdit>
+							<MinValue xsi:nil="true"/>
+							<MaxValue xsi:nil="true"/>
+							<FillChecking>DontCheck</FillChecking>
+							<ChoiceFoldersAndItems>Items</ChoiceFoldersAndItems>
+							<ChoiceParameterLinks/>
+							<ChoiceParameters/>
+							<QuickChoice>Auto</QuickChoice>
+							<CreateOnInput>Auto</CreateOnInput>
+							<ChoiceForm/>
+							<LinkByType/>
+							<ChoiceHistoryOnInput>Auto</ChoiceHistoryOnInput>
+							<Indexing>DontIndex</Indexing>
+							<FullTextSearch>Use</FullTextSearch>
+							<DataHistory>Use</DataHistory>
+						</Properties>
+					</Attribute>
+<Attribute uuid="024c3e5b-d8c9-46bd-b19e-c380d168de10">
+						<Properties>
+							<Name>Vendor</Name>
+							<Synonym>
+								<v8:item>
+									<v8:lang>ru</v8:lang>
+									<v8:content>Поставщик</v8:content>
+								</v8:item>
+								<v8:item>
+									<v8:lang>en</v8:lang>
+									<v8:content>Vendor</v8:content>
+								</v8:item>
+							</Synonym>
+							<Comment/>
+							<Type>
+								<v8:Type>cfg:CatalogRef.Vendors</v8:Type>
+							</Type>
+							<PasswordMode>false</PasswordMode>
+							<Format/>
+							<EditFormat/>
+							<ToolTip/>
+							<MarkNegatives>false</MarkNegatives>
+							<Mask/>
+							<MultiLine>false</MultiLine>
+							<ExtendedEdit>false</ExtendedEdit>
+							<MinValue xsi:nil="true"/>
+							<MaxValue xsi:nil="true"/>
+							<FillChecking>DontCheck</FillChecking>
+							<ChoiceFoldersAndItems>Items</ChoiceFoldersAndItems>
+							<ChoiceParameterLinks/>
+							<ChoiceParameters/>
+							<QuickChoice>Auto</QuickChoice>
+							<CreateOnInput>Auto</CreateOnInput>
+							<ChoiceForm/>
+							<LinkByType/>
+							<ChoiceHistoryOnInput>Auto</ChoiceHistoryOnInput>
+							<Indexing>DontIndex</Indexing>
+							<FullTextSearch>Use</FullTextSearch>
+							<DataHistory>Use</DataHistory>
+						</Properties>
+					</Attribute>
+</ChildObjects>
+			</TabularSection>
+<Form>ChoiceForm</Form>
+<Form>ItemForm</Form>
+<Form>ListForm</Form>
+<Form>PriceList</Form>
+<Template>MainList</Template>
+<Template>PF_MXL_Details</Template>
+<Command uuid="f6005fb8-a382-4473-be92-f3f6679c8195">
 				<Properties>
 					<Name>PriceList</Name>
 					<Synonym>
@@ -566,6 +540,32 @@
 					<Shortcut/>
 				</Properties>
 			</Command>
-		</ChildObjects>
+<Command uuid="0911d94a-3650-4f15-b41a-c301962635d6">
+				<Properties>
+					<Name>ProductPurchases</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Покупки</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Product purchases</v8:content>
+						</v8:item>
+					</Synonym>
+					<Comment/>
+					<Group>FormNavigationPanelImportant</Group>
+					<CommandParameterType>
+						<v8:Type>cfg:CatalogRef.Products</v8:Type>
+					</CommandParameterType>
+					<ParameterUseMode>Single</ParameterUseMode>
+					<ModifiesData>false</ModifiesData>
+					<Representation>Auto</Representation>
+					<ToolTip/>
+					<Picture/>
+					<Shortcut/>
+				</Properties>
+			</Command>
+</ChildObjects>
 	</Catalog>
 </MetaDataObject>
