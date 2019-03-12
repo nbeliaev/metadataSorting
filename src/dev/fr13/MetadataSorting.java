@@ -16,6 +16,28 @@ import java.util.*;
 
 public class MetadataSorting {
 
+    public static void main(String[] args) throws XPathExpressionException, TransformerException {
+
+        parseArgs(args);
+        if (sourceDirectory.isEmpty()) {
+            printHelp();
+            return;
+        }
+
+        Path path = Paths.get(sourceDirectory);
+        if (Files.notExists(path))
+            throw new IllegalArgumentException("no such directory: " + path.toString());
+
+        PerformanceMeasurement.setStartTime();
+
+        sortMainConfig();
+
+        sortDetails();
+
+        PerformanceMeasurement.printSpentTime();
+
+    }
+
     private static String sourceDirectory = "";
 
     private static void printHelp() {
@@ -332,28 +354,6 @@ public class MetadataSorting {
         parentNode.getParentNode().replaceChild(parentNodeEmpty, parentNode);
 
         saveToFile(document, file);
-
-    }
-
-    public static void main(String[] args) throws XPathExpressionException, TransformerException {
-
-        parseArgs(args);
-        if (sourceDirectory.isEmpty()) {
-            printHelp();
-            return;
-        }
-
-        Path path = Paths.get(sourceDirectory);
-        if (Files.notExists(path))
-            throw new IllegalArgumentException("no such directory: " + path.toString());
-
-        PerformanceMeasurement.setStartTime();
-
-        sortMainConfig();
-
-        sortDetails();
-
-        PerformanceMeasurement.printSpentTime();
 
     }
 
