@@ -6,25 +6,21 @@ There is CLI only.
 - Child objects sorting, such as attributes, tabular sections and etc. 
 
 ## Download and compile 
-1. Download and install Java 8.
-2. Install Apache Maven. http://maven.apache.org/
+* Download and install Java 8.
 
 * Clone this repository (or download directly from github)
 ```
-git clone https://github.com/lipido/metadataSorting.git
+git clone https://github.com/fr13Dev/metadataSorting
 ```
 * Compile and run
 ```
 cd metadataSorting
-mvn package
-cd target
-java -jar metadataSorting.jar
+jar cmvf META-INF/MANIFEST.MF  MetadataSorting.jar dev/fr13/*.class
+java -jar MetadataSorting.jar
 ```
 ## Usage
 Open command line and type
 ```
-java -jar metadataSorting.jar -h
+java -jar MetadataSorting.jar -h
 ```
-press Enter.
-
 For sorting child objects you should to use file metadataDescription.xml (you can find this file in example directory).

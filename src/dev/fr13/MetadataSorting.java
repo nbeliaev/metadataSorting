@@ -2,13 +2,14 @@ package dev.fr13;
 
 import javax.xml.transform.*;
 import javax.xml.xpath.*;
+import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class MetadataSorting {
 
-    public static void main(String[] args) throws XPathExpressionException, TransformerException {
+    public static void main(String[] args) throws XPathExpressionException, TransformerException, FileNotFoundException {
 
         String sourceDirectory = parseArgs(args);
         if (sourceDirectory.isEmpty()) {
@@ -18,7 +19,7 @@ public class MetadataSorting {
 
         Path path = Paths.get(sourceDirectory);
         if (Files.notExists(path))
-            throw new IllegalArgumentException("no such directory: " + path.toString());
+            throw new FileNotFoundException("no such directory: " + path.toString());
 
         NodesSorting nodesSorting = new NodesSorting(sourceDirectory);
 
@@ -37,7 +38,6 @@ public class MetadataSorting {
         int argsCount = args.length;
 
         if (argsCount == 0) {
-            printHelp();
             return sourceDirectory;
         }
 
@@ -46,10 +46,10 @@ public class MetadataSorting {
 
             switch (args[i]) {
                 case "-p":
-                    sourceDirectory = args[i + 1];
+                    sourceDirectory = args.length > 1 ? args[i + 1]:"";
                     break;
                 case "--path":
-                    sourceDirectory = args[i + 1];
+                    sourceDirectory = args.length > 1 ? args[i + 1]:"";
                     break;
                 case "-h":
                     printHelp = true;
@@ -70,7 +70,8 @@ public class MetadataSorting {
     }
 
     private static void printHelp() {
-        userMessage("MetadataSorting sorts metadata for 1C:Enterprise solutions \n" +
+        userMessage("This tool sorts metadata objects by alphabet for solutions based on 1C:Enterprise platform. \n" +
+                "Works with xml files of configuration. \n" +
                 "Use the -p or --path to set directory path with metadata");
     }
 
