@@ -1,13 +1,16 @@
-package dev.fr13;
+package dev.fr13.main;
 
-import javax.xml.transform.*;
-import javax.xml.xpath.*;
+import dev.fr13.NodesSorting;
+import dev.fr13.PerformanceMeasurement;
+
+import javax.xml.transform.TransformerException;
+import javax.xml.xpath.XPathExpressionException;
 import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class MetadataSorting {
+public class Main {
 
     public static void main(String[] args) throws XPathExpressionException, TransformerException, FileNotFoundException {
 
@@ -42,14 +45,14 @@ public class MetadataSorting {
         }
 
         boolean printHelp = false;
-        for (int i=0; i < args.length; i++) {
+        for (int i = 0; i < args.length; i++) {
 
             switch (args[i]) {
                 case "-p":
-                    sourceDirectory = args.length > 1 ? args[i + 1]:"";
+                    sourceDirectory = args.length > 1 ? args[i + 1] : "";
                     break;
                 case "--path":
-                    sourceDirectory = args.length > 1 ? args[i + 1]:"";
+                    sourceDirectory = args.length > 1 ? args[i + 1] : "";
                     break;
                 case "-h":
                     printHelp = true;
@@ -70,13 +73,8 @@ public class MetadataSorting {
     }
 
     private static void printHelp() {
-        userMessage("This tool sorts metadata objects by alphabet for solutions based on 1C:Enterprise platform. \n" +
+        System.out.println(("This tool sorts metadata objects by alphabet for solutions based on 1C:Enterprise platform. \n" +
                 "Works with xml files of configuration. \n" +
-                "Use the -p or --path to set directory path with metadata");
+                "Use the -p or --path to set directory path with metadata"));
     }
-
-    static void userMessage(String msg) {
-        System.out.println(msg);
-    }
-
 }

@@ -6,12 +6,12 @@ public class PerformanceMeasurement {
 
     private long startTime;
 
-    PerformanceMeasurement() {
+    public PerformanceMeasurement() {
         startTime = System.currentTimeMillis();
     }
 
     public void printSpentTime() {
-        long estimatedTime  = System.currentTimeMillis() - startTime;
+        long estimatedTime = System.currentTimeMillis() - startTime;
         System.out.println("Spent processing time: " + String.format("%d min, %d sec, %d msec",
                 TimeUnit.MILLISECONDS.toMinutes(estimatedTime),
                 TimeUnit.MILLISECONDS.toSeconds(estimatedTime),
