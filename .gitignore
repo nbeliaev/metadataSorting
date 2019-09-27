@@ -6,3 +6,5 @@
 .DS_Store
 *.zip
 /target
+/in
+/out
