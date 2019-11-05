@@ -1,23 +1,14 @@
 package dev.fr13;
 
+import dev.fr13.helpers.DomDocument;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.*;
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,49 +16,41 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class NodesSorting {
-
     private final String SOURCE_DIRECTORY;
+    private final File file;
 
     public NodesSorting(String sourceDirectory) {
         SOURCE_DIRECTORY = sourceDirectory;
+        file = new File(SOURCE_DIRECTORY + File.separatorChar + "Configuration.xml");
     }
 
-    public void sortMainConfig() throws TransformerException {
-
-        File file = new File(SOURCE_DIRECTORY + File.separatorChar + "Configuration.xml");
-        Document document = getDomDocument(file);
-        Node parentNode = document.getElementsByTagName("ChildObjects").item(0);
-        if (!parentNode.hasChildNodes())
+    public void sortMainConfig() {
+        final Document document = DomDocument.getDom(file);
+        final Node parentNode = document.getElementsByTagName("ChildObjects").item(0);
+        if (!parentNode.hasChildNodes()) {
             return;
-
-        String nodeName = "";
-        Map<String, Node> sortedNodes = new TreeMap<>();
-
-        Node parentNodeEmpty = document.importNode(parentNode, false);
-
-        NodeList unsortedObjects = parentNode.getChildNodes();
-        for (int i = 0; i < unsortedObjects.getLength(); i++) {
-
-            Node currentUnsortedNode = unsortedObjects.item(i);
-            if (currentUnsortedNode.getNodeType() != Node.ELEMENT_NODE)
-                continue;
-
-            if (!nodeName.equals(currentUnsortedNode.getNodeName())) {
-                importSortedNodes(sortedNodes, parentNodeEmpty);
-            }
-
-            String currentNodeText = currentUnsortedNode.getTextContent();
-            sortedNodes.put(currentNodeText, currentUnsortedNode);
-            nodeName = currentUnsortedNode.getNodeName();
         }
 
-        if (sortedNodes.size() != 0)
+        String nodeName = "";
+        final Map<String, Node> sortedNodes = new TreeMap<>();
+        final Node parentNodeEmpty = document.importNode(parentNode, false);
+        final NodeList unsortedObjects = parentNode.getChildNodes();
+        for (int i = 0; i < unsortedObjects.getLength(); i++) {
+            final Node currentUnsortedNode = unsortedObjects.item(i);
+            if (currentUnsortedNode.getNodeType() == Node.ELEMENT_NODE) {
+                if (!nodeName.equals(currentUnsortedNode.getNodeName())) {
+                    importSortedNodes(sortedNodes, parentNodeEmpty);
+                }
+                sortedNodes.put(currentUnsortedNode.getTextContent(), currentUnsortedNode);
+                nodeName = currentUnsortedNode.getNodeName();
+            }
+        }
+
+        if (sortedNodes.size() != 0) {
             importSortedNodes(sortedNodes, parentNodeEmpty);
-
+        }
         parentNode.getParentNode().replaceChild(parentNodeEmpty, parentNode);
-
-        saveToFile(document, file);
-
+        DomDocument.saveDom(document, file);
     }
 
     public void sortDetails() throws XPathExpressionException, TransformerException {
@@ -113,7 +96,8 @@ public class NodesSorting {
     */
     private void sortFileNodes(File file, Node metaObject) throws XPathExpressionException, TransformerException {
 
-        Document documentToSort = getDomDocument(file);
+        Document documentToSort = null;
+        documentToSort = DomDocument.getDom(file);
         Node parentNode = documentToSort.getElementsByTagName("ChildObjects").item(0);
         if (!parentNode.hasChildNodes()) {
             return;
@@ -182,7 +166,7 @@ public class NodesSorting {
         }
 
         parentNode.getParentNode().replaceChild(nodeToReplace, parentNode);
-        saveToFile(documentToSort, file);
+        DomDocument.saveDom(documentToSort, file);
 
     }
 
@@ -237,24 +221,6 @@ public class NodesSorting {
 
     }
 
-    private Document getDomDocument(File file) {
-
-        Document document = null;
-        try {
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            document = builder.parse(file);
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (IOException | SAXException e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
-
-        return document;
-
-    }
-
     private void importSortedNodes(Map tree, Node node) {
 
         tree.forEach((k, v) -> {
@@ -279,7 +245,7 @@ public class NodesSorting {
         }
 
         try {
-            metaDataDescription = getDomDocument(path.toFile()).getElementsByTagName("MetaDataDescription").item(0);
+            metaDataDescription = DomDocument.getDom(path.toFile()).getElementsByTagName("MetaDataDescription").item(0);
         } catch (IllegalArgumentException e) {
             System.out.println("Invalid format of metadataDescription");
             System.exit(1);
@@ -292,16 +258,4 @@ public class NodesSorting {
         return metaDataDescription.getChildNodes();
 
     }
-
-    private void saveToFile(Document document, File file) throws TransformerException {
-
-        Transformer transformer = TransformerFactory.newInstance().newTransformer();
-        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-
-        DOMSource source = new DOMSource(document);
-        StreamResult result = new StreamResult(file);
-        transformer.transform(source, result);
-
-    }
-
 }

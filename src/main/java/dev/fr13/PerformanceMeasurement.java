@@ -3,10 +3,9 @@ package dev.fr13;
 import java.util.concurrent.TimeUnit;
 
 public class PerformanceMeasurement {
-
     private long startTime;
 
-    public PerformanceMeasurement() {
+    public void start() {
         startTime = System.currentTimeMillis();
     }
 
